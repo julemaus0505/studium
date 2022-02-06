@@ -1,11 +1,14 @@
 package minimail;
 
-import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import net.miginfocom.swing.MigLayout;
 
 public class MiniMailStart extends JFrame {
 
@@ -28,31 +31,32 @@ public class MiniMailStart extends JFrame {
 				// dann das Senden starten
 				senden();
 
-			// wurde auf Empfangen geklickt?
+				// wurde auf Empfangen geklickt?
 			} else if (event.getActionCommand().equals("empfangen")) {
 
 				// dann das Empfangen starten
 				empfangen();
-				
-			// wurde auf Weiterleiten geklickt?
-			} else if (event.getActionCommand().equals("weiterleiten")) {
-				
-				// dann das Weiterleiten starten
-				weiterleiten();
-				
-			// wurde auf Weiterleiten geklickt?
-			} else if (event.getActionCommand().equals("beantworten")) {
-				
-				// dann Beantworten starten 
-				beantworten();
-		
+
+				// wurde auf E-Mails Löschen geklickt?
+			} else if (event.getActionCommand().equals("emailLoeschen")) {
+
+				// dann das E-Mail löschen starten
+				loescheEmail();
+
+				// wurde auf Benutzer Löschen geklickt?
+			} else if (event.getActionCommand().equals("benutzerLoeschen")) {
+
+				// dann das E-Mail löschen starten
+				loescheBenutzer();
+
 				// wurde auf Beenden geklickt?
-		} else if (event.getActionCommand().equals("ende")) {
+			} else if (event.getActionCommand().equals("ende")) {
 
 				// dann beenden
 				beenden();
 			}
 		}
+
 	}
 
 	// der Konstruktor
@@ -62,56 +66,50 @@ public class MiniMailStart extends JFrame {
 		this.password = password;
 
 		// ein FlowLayout
-		setLayout(new FlowLayout(FlowLayout.LEFT));
+		setLayout(new MigLayout("w 350, h 250", "[center, 50%][center, 50%]"));
+
+		// Label für die Schaltflächen
+		JLabel programm = new JLabel("E-Mail Programm");
+		programm.setFont(new Font("Arial", 30, 30));
 
 		// die Schaltflächen
-		JButton liste = new JButton("Senden");
-		liste.setActionCommand("senden");
-		JButton einzel = new JButton("Empfangen");
-		einzel.setActionCommand("empfangen");
-		JButton weiterleitenButton = new JButton("Weiterleiten");
-		weiterleitenButton.setActionCommand("weiterleiten");
-		JButton beantwortenButton = new JButton("Beantworten");
-		beantwortenButton.setActionCommand("beantworten");
+		JLabel sendenLabel = new JLabel("Senden");
+		JButton sendenButton = new JButton("Senden");
+		sendenButton.setActionCommand("senden");
+		JLabel empfangenLabel = new JLabel("Empfangen");
+		JButton empfangenButton = new JButton("Empfangen");
+		empfangenButton.setActionCommand("empfangen");
+		JLabel emailLoeschenLabel = new JLabel("E-Mails Löschen");
+		JButton emailsLoeschenButton = new JButton("E-Mails Löschen");
+		emailsLoeschenButton.setActionCommand("emailLoeschen");
+		JLabel benutzerLoeschenLabel = new JLabel("Benutzer Löschen");
+		JButton benutzerLoeschenButton = new JButton("Benutzer Löschen");
+		benutzerLoeschenButton.setActionCommand("benutzerLoeschen");
 		JButton beenden = new JButton("Beenden");
 		beenden.setActionCommand("ende");
 
 		MeinListener listener = new MeinListener();
-		liste.addActionListener(listener);
-		einzel.addActionListener(listener);
-		weiterleitenButton.addActionListener(listener);
-		beantwortenButton.addActionListener(listener);
+		sendenButton.addActionListener(listener);
+		empfangenButton.addActionListener(listener);
+		emailsLoeschenButton.addActionListener(listener);
+		benutzerLoeschenButton.addActionListener(listener);
 		beenden.addActionListener(listener);
 
-		add(liste);
-		add(einzel);
-		add(weiterleitenButton);
-		add(beantwortenButton);
-		add(beenden);
-		
-		// Button zum Weiterleiten, mit dem Button wird die Methode senden aufgerufen
-		weiterleitenButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				senden();
-				
-			}
-		});
-		
-		beantwortenButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				senden();
-				
-			}
-		});
-		
+		add(programm, "spanx, center,wrap 30");
+		add(sendenLabel);
+		add(empfangenLabel, "wrap ");
+		add(sendenButton, "growx");
+		add(empfangenButton, "growx, wrap ");
+		add(emailLoeschenLabel);
+		add(benutzerLoeschenLabel, "wrap ");
+		add(emailsLoeschenButton, "growx");
+		add(benutzerLoeschenButton, "growx,wrap ");
+		add(beenden, "growx,spanx");
 
 		// Größe setzen, Standardverhalten festlegen und anzeigen
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setVisible(true);
 	}
 
@@ -123,17 +121,18 @@ public class MiniMailStart extends JFrame {
 	private void empfangen() {
 		new Empfangen(email, password);
 	}
-	
-	private void weiterleiten() {
-		new Weiterleiten();
+
+	private void loescheBenutzer() {
 		
+		MailDBManager.fuehreSqlUpdateAus("DELETE FROM benutzer");
+
 	}
-	
-	private void beantworten() {
-		new Beantworten();
-		
+
+	private void loescheEmail() {
+		MailDBManager.fuehreSqlUpdateAus("DELETE FROM empfangen");
+
 	}
-	
+
 	private void beenden() {
 		System.exit(0);
 	}

@@ -61,6 +61,7 @@ public class Benutzer {
 		loginButton.setEnabled(false);
 		registrierenButton = new JButton("Registrieren");
 		abbrechenButton = new JButton("Abbrechen");
+		JButton loginDatenEintragen = new JButton("Daten eingeben");
 
 
 		// ToolTips erstellt
@@ -83,7 +84,20 @@ public class Benutzer {
 			}
 
 		});
+		
+		loginDatenEintragen.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				emailField.setText("petersenjulia60@gmail.com");
+				passwordField.setText("petersen2022");
+				loginButton.setEnabled(true);
+				registrierenButton.setEnabled(false);
+				
+			}
+		});
 
+		
 		// Neu
 		loginButton.addActionListener(new ActionListener() {
 
@@ -139,6 +153,7 @@ public class Benutzer {
 		loginFenster.add(registrierenButton, " skip 1, spanx, split 3");
 		loginFenster.add(loginButton);
 		loginFenster.add(abbrechenButton, "growx 10");
+		loginFenster.add(loginDatenEintragen);
 
 		// Fenster Größe setzen
 		loginFenster.setSize(600, 600);
