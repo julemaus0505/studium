@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#eigeneBuchseiteOeffnen" prefHeight="477.0" prefWidth="266.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<ImageView fx:id="buchImagView" fitHeight="204.0" fitWidth="162.0" layoutX="50.0" layoutY="28.0" pickOnBounds="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport></ImageView>
+		<Label fx:id="buchGebundenLabel" layoutX="79.0" layoutY="246.0" text="buchGebunden" textAlignment="CENTER">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</Label>
+		<Label fx:id="titelLabel" layoutX="79.0" layoutY="291.0" prefHeight="29.0" prefWidth="96.0" text="titel" textAlignment="LEFT" wrapText="true">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</Label>
+		<Label fx:id="autorenLabel" alignment="CENTER_LEFT" contentDisplay="CENTER" layoutX="77.0" layoutY="328.0" prefHeight="29.0" prefWidth="113.0" text="Autoren" textAlignment="LEFT">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</Label>
+		<Label fx:id="preisLabel" alignment="CENTER_LEFT" layoutX="79.0" layoutY="369.0" text="Preis" textAlignment="LEFT">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</Label>
+      <Button fx:id="kaufenButton" alignment="CENTER_LEFT" contentDisplay="CENTER" layoutX="70.0" layoutY="411.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="122.0" style="-fx-background-color: red;" text="Kaufen" textFill="#e8e8e8" />
+	</children>
+</AnchorPane>

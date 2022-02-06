@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taschenrechner.fx.TaschenrechnerController">
+	<children>
+		<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+			<children>
+				<Label alignment="CENTER" layoutX="225.0" layoutY="14.0" style="&#10;" text="Taschenrechner" textAlignment="CENTER" textFill="#1d0606" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="false">
+					<font>
+						<Font name="System Bold" size="24.0" />
+					</font>
+				</Label>
+				<Label layoutX="30.0" layoutY="95.0" prefHeight="35.0" prefWidth="170.0" text="Bitte Zahl 1 eingeben.">
+					<font>
+						<Font name="System Bold" size="16.0" />
+					</font>
+				</Label>
+				<Label layoutX="443.0" layoutY="95.0" prefHeight="35.0" prefWidth="170.0" text="Bitte Zahl 2 eingeben.">
+					<font>
+						<Font name="System Bold" size="16.0" />
+					</font>
+				</Label>
+				<TextField fx:id="zahl1TextField" layoutX="41.0" layoutY="158.0" />
+				<ComboBox fx:id="operatorenComboBox" layoutX="238.0" layoutY="158.0" prefWidth="150.0" />
+				<TextField fx:id="zahl2TextField" layoutX="443.0" layoutY="158.0" />
+				<Label layoutX="243.0" layoutY="269.0" prefHeight="35.0" prefWidth="150.0" text="Das Eergebis lautet">
+					<font>
+						<Font name="System Bold" size="16.0" />
+					</font>
+				</Label>
+				<Button layoutX="231.0" layoutY="216.0" mnemonicParsing="false" onAction="#berechnen" prefHeight="35.0" prefWidth="170.0" text="Berechnen">
+					<font>
+						<Font name="System Bold" size="16.0" />
+					</font>
+				</Button>
+				<TextField fx:id="ergebnisTextField" editable="false" layoutX="245.0" layoutY="322.0" />
+			</children>
+		</AnchorPane>
+	</children>
+</VBox>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="miniMalFX.FXMLController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Datei">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#beendenClick" text="Beenden" />
+               </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <ToolBar prefHeight="53.0" prefWidth="640.0">
+        <items>
+          <Button mnemonicParsing="false" onAction="#linieKlick" prefHeight="34.0" prefWidth="35.0">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/line24.gif" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#kreisKlick" prefHeight="34.0" prefWidth="35.0">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/circle24.gif" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#rechteckKlick" prefHeight="34.0" prefWidth="35.0">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/rect24.gif" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#gefuellterKreisKlick" prefHeight="34.0" prefWidth="35.0">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/circlefilled24.gif" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ColorPicker fx:id="farbauswahl" onAction="#farbAuswahlZeigen" />
+        </items>
+      </ToolBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="600.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Canvas fx:id="zeichenflaeche" height="883.0" layoutX="29.0" layoutY="19.0" onMousePressed="#mausGedrueckt" onMouseReleased="#mausLos" width="943.0" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

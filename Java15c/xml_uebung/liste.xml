@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eintraege>
+	<eintrag>
+		<name>Marcus Petersen</name>
+		<punkte>100</punkte>
+	</eintrag>
+	<eintrag>
+		<name>Sascha Petersen</name>
+		<punkte>1000</punkte>
+	</eintrag>
+	<eintrag>
+		<name>Steven Grimm</name>
+		<punkte>10</punkte>
+	</eintrag>
+	<eintrag>
+		<name>Lea Petersen</name>
+		<punkte>1</punkte>
+	</eintrag>
+	
+</eintraege>

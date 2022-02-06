@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>einsendeaufgabe4</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>src-workspace1</name>
+			<type>2</type>
+			<location>E:/java-uebungen/Studium-ILS/Java07c/workspace-einsendeaufgabe/einsendeaufgaben_java07c/src</location>
+		</link>
+	</linkedResources>
+</projectDescription>

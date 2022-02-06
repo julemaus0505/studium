@@ -1,0 +1,12 @@
+Oma
+Pferd
+Kind
+Hund
+Reisen
+Auto
+Flugzeug
+Hotel
+Katze
+HUnd
+Anzahl Wörter: 10
+Anzahl Wörter: 12

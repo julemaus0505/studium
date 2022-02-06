@@ -1,0 +1,11 @@
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<FlowPane fx:controller="javafx_beispiel2.FXMLController" xmlns:fx="http://javafx.com/fxml">
+	<Label>Hallo Welt</Label>
+	<Label>Es grüßt Dich Julia Petersen</Label>
+	<Label fx:id="ausgabe"/>
+	<Button text= "Text setzen" onAction="#schaltflaeche2Klick"/>
+	<Button text= "Schließen" onAction="#schaltflaecheKlick"/>
+</FlowPane>

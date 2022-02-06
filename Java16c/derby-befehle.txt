@@ -1,0 +1,4 @@
+#### Mit der Adressen-DB verbinden #####
+
+connect 'jdbc:derby://localhost:1527/d:\\Dokumente\\Studium\\git-repository\\studium\\Java16c\\Probe\\adressenDB;create=true';
+

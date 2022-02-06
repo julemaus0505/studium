@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studium.aufgabe3_1.FXMLController">
+   <children>
+      <TextField fx:id="ausgabe" alignment="CENTER" prefHeight="47.0" prefWidth="588.0" text="Standardtext">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Button fx:id="buttonGroesser" mnemonicParsing="false" onAction="#groesserKlick" prefHeight="66.0" prefWidth="588.0" text="&lt;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonKleiner" mnemonicParsing="false" onAction="#kleinerKlick" prefHeight="66.0" prefWidth="588.0" text="&gt;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+   </children>
+</FlowPane>

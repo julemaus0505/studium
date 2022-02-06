@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="1036.0" prefWidth="1402.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lagerverwaltung.LagerverwaltungController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="520.0" prefWidth="781.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Text layoutX="501.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lagerverwaltung" textAlignment="CENTER" wrappingWidth="409.31629371643066">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Label layoutX="445.0" layoutY="210.0" prefHeight="28.0" prefWidth="177.0" text="Eingabe Breite">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="755.0" layoutY="205.0" prefHeight="28.0" prefWidth="177.0" text="Eingabe Länge">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="1056.0" layoutY="198.0" prefHeight="28.0" prefWidth="177.0" text="Eingabe Höhe">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="105.0" layoutY="350.0" prefHeight="38.0" prefWidth="270.0" text="Bitte wählen Sie aus!">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="eingabeBreiteTextField" layoutX="445.0" layoutY="254.0" prefHeight="38.0" prefWidth="233.0" promptText="Bitte die Breite der Kiste eingeben" />
+            <TextField fx:id="eingabeLaengeTextField" layoutX="755.0" layoutY="254.0" prefHeight="38.0" prefWidth="233.0" promptText="Bitte die Länge der Kiste eingeben" />
+            <TextField fx:id="eingabeHoeheTextField" layoutX="1056.0" layoutY="252.0" prefHeight="38.0" prefWidth="233.0" promptText="Bitte die Höhe der Kiste eingeben" />
+            <ComboBox fx:id="waehleFunktionenComboBox" layoutX="340.0" layoutY="350.0" prefHeight="38.0" prefWidth="270.0" promptText="Bitte auswählen...." visibleRowCount="5" />
+            <TextArea fx:id="datenDerKistenAnzeigenTextArea" editable="false" layoutX="70.0" layoutY="488.0" prefHeight="490.0" prefWidth="1272.0" promptText="Daten Anzeigen" wrapText="true" />
+            <Button fx:id="bestaetigungButton" layoutX="701.0" layoutY="350.0" mnemonicParsing="false" onAction="#handle" prefHeight="38.0" prefWidth="253.0" style="-fx-background-color: #4B0082;" text="Bestätigung" textFill="#f5eeee">
+               <font>
+                  <Font name="Arial Nova Bold" size="20.0" />
+               </font>
+            </Button>
+            <Label layoutX="490.0" layoutY="447.0" prefHeight="26.0" prefWidth="432.0" text="Hier werden die Daten angezeigt." textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="105.0" layoutY="212.0" prefHeight="28.0" prefWidth="188.0" text="Lagerplatznummern">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="lagerplatznummernTextField" editable="false" layoutX="105.0" layoutY="255.0" prefHeight="38.0" prefWidth="260.0" promptText="Lagerplatznummern">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </TextField>
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

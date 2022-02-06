@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="ausgabe" prefHeight="41.0" prefWidth="98.0" text="Hallo Welt">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="ausgabe2" prefHeight="46.0" prefWidth="502.0" text="Es grüßt dich Julia Petersen">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button mnemonicParsing="false" onAction="#schließen" prefHeight="58.0" prefWidth="269.0" text="Schließen" />
+      <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="287.0" text="farbe ändern" />
+   </children>
+</FlowPane>
