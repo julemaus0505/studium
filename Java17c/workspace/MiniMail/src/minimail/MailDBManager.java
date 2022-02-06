@@ -67,9 +67,10 @@ public class MailDBManager {
 	}
 
 	//
-	public static int getNaechsteId(String tabellenname) {
-		int count = fuehreSqlAus("SELECT COUNT(*) FROM " + tabellenname, resultSet -> {
+	public static Integer getNaechsteId(String tabellenname) {
+		Integer count = fuehreSqlAus("SELECT COUNT(*) FROM " + tabellenname, resultSet -> {
 			try {
+				resultSet.next();
 				return resultSet.getInt(1) + 1;
 			} catch (SQLException exception) {
 				return null;

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,10 +27,11 @@ public class Registrieren {
 	private JTextField emailTextField;
 	private JPasswordField passwordField;
 	private JPasswordField passwortWiederholenPasswordField;
+	private JFrame registrierenFester;
 
 	// Mehtode kümmert sich um das Fenster Registrieren
 	public void zeigeRegistrierenFenster(JFrame loginFenster) {
-		JFrame registrierenFester = new JFrame("Registrieren");
+		registrierenFester = new JFrame("Registrieren");
 		registrierenFester.setLayout(new MigLayout("w 300, h 300"));
 		registrierenFester.setResizable(false);
 
@@ -81,13 +83,12 @@ public class Registrieren {
 			public void actionPerformed(ActionEvent event) {
 
 				// Eintrag in die Datenbank
-				int naechsteId = MailDBManager.getNaechsteId("benutzer");
-				MailDBManager.fuehreSqlUpdateAus(
-						String.format("INSERT INTO benutzer (id, email, passwort) VALUES (%d, '%s', '%s')", naechsteId,
-								emailTextField.getText(), passwordField.getText()));
-
-				pruefeEmailAdresseUndPasswoerter(emailTextField.getText());
-
+				if (pruefeBenutzereingaben(emailTextField.getText())) {
+					int naechsteId = MailDBManager.getNaechsteId("benutzer");
+					MailDBManager.fuehreSqlUpdateAus(
+							String.format("INSERT INTO benutzer (id, email, passwort) VALUES (%d, '%s', '%s')",
+									naechsteId, emailTextField.getText(), passwordField.getText()));
+				}
 			}
 		});
 
@@ -141,16 +142,42 @@ public class Registrieren {
 
 	// Neu Email und Passwort überprüft
 	@SuppressWarnings("deprecation")
-	private void pruefeEmailAdresseUndPasswoerter(String emailAdresse) {
+	private boolean pruefeBenutzereingaben(String emailAdresse) {
 
-		if (emailAdresse.matches("^[(a-zA-Z-0-9-\\_\\+\\.)]+@[(a-z-A-z)]+\\.[(a-zA-z)]{2,3}$")
-				&& passwordField.getText().equals(passwortWiederholenPasswordField.getText())) {
+		// Prüfe ob Benutzer in der Datenbank schon vorhanden iat
+		Integer emailAdresseVorhanden = MailDBManager
+				.fuehreSqlAus(String.format("SELECT * FROM benutzer WHERE email = '%s'", emailAdresse), resultSet -> {
 
-			JOptionPane.showMessageDialog(null, "Willkommen die Registrierung hat geklappt.");
+					try {
+						if (resultSet.next()) {
+							return 1;
+						} else {
+
+							return 0;
+						}
+					} catch (SQLException exception) {
+						return -1;
+
+					}
+
+				});
+
+		if (emailAdresseVorhanden == 1) {
+			JOptionPane.showMessageDialog(registrierenFester, "Die E-Mailadresse ist bereits registriet.");
+
+		} else if (!emailAdresse.matches("^[(a-zA-Z-0-9-\\_\\+\\.)]+@[(a-z-A-z)]+\\.[(a-zA-z)]{2,3}$")
+				|| !passwordField.getText().equals(passwortWiederholenPasswordField.getText())) {
+
+			JOptionPane.showMessageDialog(registrierenFester,
+					"Die Email Adresse ist ungültig, oder Passwörter simmen nicht über ein.");
 
 		} else {
-			JOptionPane.showMessageDialog(null,
-					"Die Email Adresse ist ungültig, oder Passwörter simmen nicht über ein.");
+
+			JOptionPane.showMessageDialog(registrierenFester, "Willkommen die Registrierung hat geklappt.");
+
+			return true;
 		}
+
+		return false;
 	}
 }

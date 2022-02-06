@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -124,12 +125,19 @@ public class MiniMailStart extends JFrame {
 
 	private void loescheBenutzer() {
 		
-		MailDBManager.fuehreSqlUpdateAus("DELETE FROM benutzer");
+		if (JOptionPane.showConfirmDialog(this, "Möchten Sie die Benutzer löschen") == JOptionPane.YES_OPTION) {
+			MailDBManager.fuehreSqlUpdateAus("DELETE FROM benutzer");
+			
+		} else {
+			
+		}
+		
 
 	}
 
 	private void loescheEmail() {
 		MailDBManager.fuehreSqlUpdateAus("DELETE FROM empfangen");
+		
 
 	}
 

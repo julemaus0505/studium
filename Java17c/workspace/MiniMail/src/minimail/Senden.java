@@ -230,9 +230,5 @@ public class Senden extends JFrame {
 		// nach dem Versenden lassen wir die Anzeige aktualisieren
 		tabelleAktualisieren();
 	}
-	
-	// Zum Weiterleiten
-	private void weiterleiten() {
-		
-	}
+
 }
