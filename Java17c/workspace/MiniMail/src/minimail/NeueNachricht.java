@@ -35,14 +35,13 @@ public class NeueNachricht extends JDialog {
 	private JTextField empfaenger;
 	private JTextField betreff;
 	private JTextArea inhalt;
-	
+
 	private String absenderEmail;
 	private String password;
 
 	// für die Schaltflächen
 	private JButton ok;
 	private JButton abbrechen;
-	
 
 	// die innere Klasse für den ActionListener
 	class NeuListener implements ActionListener {
@@ -64,21 +63,39 @@ public class NeueNachricht extends JDialog {
 			}
 		}
 	}
-	public NeueNachricht(JFrame parent, boolean modal, String absenderEmail, String password, String betreff, String inhalt) {
+
+	// der Konstruktor für Beantworten
+	public NeueNachricht(JFrame parent, boolean modal, String absenderEmail, String password, String betreff,
+			String inhalt, String empfaenger) {
 		this(parent, modal, absenderEmail, password);
-		
+		this.absenderEmail = absenderEmail;
+
+		setTitle("E-Mail beantworten");
+		ok.setText("Beantworten");
+		this.betreff.setText("AW:" + betreff);
+		this.inhalt.setText("\n\n----- Text der ursprünglichen Nachricht -----\n\n" + inhalt);
+		this.empfaenger.setText(empfaenger);
+
+	}
+
+	// der Konstruktor für Weiterleiten
+	public NeueNachricht(JFrame parent, boolean modal, String absenderEmail, String password, String betreff,
+			String inhalt) {
+		this(parent, modal, absenderEmail, password);
+
 		setTitle("E-Mail weiterleiten");
 		ok.setText("Weiterleiten");
 		this.betreff.setText("WG:" + betreff);
-		this.inhalt.setText("\n\n----- Text der ursprünglichen Nachricht -----\n\n" + inhalt);	
+		this.inhalt.setText("\n\n----- Text der ursprünglichen Nachricht -----\n\n" + inhalt);
+
 	}
 
-	// der Konstruktor
+	// der Konstruktor für Senden
 	public NeueNachricht(JFrame parent, boolean modal, String absenderEmail, String password) {
 		super(parent, modal);
 		this.absenderEmail = absenderEmail;
 		this.password = password;
-		
+
 		setTitle("Neue Nachricht");
 
 		// die Oberfläche erstellen
@@ -129,6 +146,7 @@ public class NeueNachricht extends JDialog {
 
 		// anzeigen
 		setSize(600, 300);
+
 	}
 
 	// die Methode verschickt die Nachricht
@@ -146,20 +164,20 @@ public class NeueNachricht extends JDialog {
 	}
 
 	private Session verbindungHerstellen() {
-		
+
 		// der Server
 		String server = "smtp.gmail.com";
 
 		// die Eigenschaften setzen
 		Properties eigenschaften = new Properties();
-		
+
 		// die Authentifizierung über TLS
 		eigenschaften.put("mail.smtp.auth", "true");
 		eigenschaften.put("mail.smtp.starttls.enable", "true");
-		
+
 		// der Server
 		eigenschaften.put("mail.smtp.host", server);
-		
+
 		// der Port zum Versenden
 		eigenschaften.put("mail.smtp.port", "587");
 

@@ -6,5 +6,6 @@ module MiniMail {
 	requires transitive java.sql;
 	requires miglayout.swing;
 	requires javax.mail;
+	
 
 }

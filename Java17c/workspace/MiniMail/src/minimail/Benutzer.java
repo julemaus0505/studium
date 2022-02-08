@@ -19,7 +19,17 @@ import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
 
-// NEUE Klasse 
+/**
+ * 
+ * @author Julia Petersen
+ *
+ *Neue Klasse Benutzer erstellt, sie dient dafür das der Benutzer sich über eine Maske einloggen.
+ *Sie hat ein Hauptfenster, in dem dann die Benutzerdaten in dem Feld E-Mail und Passwort eingeben werden müssen, um sich einzuloggen.
+ *wenn der Loginbutton geklickt wird, wird in der Datenbank nach dem Benutzer geschaut, ob es ihn in der Datenbank gibt.
+ *Wenn ja, wird das Mail Programm geöffnet. Andernfalss muss der Anwender sich erst registrieren.
+ *
+ */
+
 public class Benutzer {
 
 	// Klassenvariablen
@@ -42,6 +52,7 @@ public class Benutzer {
 		loginFenster.setTitle("Login Bereich");
 
 		// ein Layout setzen
+		// beim Layout habe ich mich für ein MigLayout entschieden
 		loginFenster.setLayout(new MigLayout("w 300, h 200"));
 
 		// Fenster kann nicht verändert werden
@@ -63,11 +74,10 @@ public class Benutzer {
 		abbrechenButton = new JButton("Abbrechen");
 		JButton loginDatenEintragen = new JButton("Daten eingeben");
 
-
 		// ToolTips erstellt
 		emailField.setToolTipText("Bitte die E-mail eingeben");
 		passwordField.setToolTipText("Bitte Passwort eingeben");
-		
+
 		// Focus auf die TextFields gesetzt
 		emailField.addFocusListener(getPruefeTextFieldListener());
 		passwordField.addFocusListener(getPruefeTextFieldListener());
@@ -84,26 +94,27 @@ public class Benutzer {
 			}
 
 		});
-		
+
+		// DAS MUSS VOR DEM ABSCHICKEN GELÖSCHT WERDEN
 		loginDatenEintragen.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				emailField.setText("petersenjulia60@gmail.com");
 				passwordField.setText("petersen2022");
 				loginButton.setEnabled(true);
-				registrierenButton.setEnabled(false);
-				
+				registrierenButton.setEnabled(true);
+
 			}
 		});
 
-		
-		// Neu
+		// Neu wenn der Loginbutton geklickt wurde, wird überprüft ob es den Benutzer schon in der Datenbank gibt
 		loginButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
 
+				// eine neue Klasse für meine SQL Abfragen erstellt, und hier für die abfrage genutzt
 				MailDBManager.fuehreSqlAus(
 						String.format("SELECT COUNT(*) FROM benutzer WHERE email = '%s' AND passwort = '%s'",
 								emailField.getText(), passwordField.getText()),
@@ -115,9 +126,8 @@ public class Benutzer {
 
 								} else {
 
-									JOptionPane.showMessageDialog(null, "Login Fehlgeschlagen, bitte neu eingeben");
-									emailField.setText("");
-									passwordField.setText("");
+									JOptionPane.showMessageDialog(null,
+											"Login Fehlgeschlagen, bitte neu eingeben, oder sich erst registrieren!");
 
 								}
 							} catch (SQLException exception) {
@@ -174,6 +184,7 @@ public class Benutzer {
 	}
 
 	// TextField darf nicht leer sein
+	// die Methode für den Focus
 	private FocusListener getPruefeTextFieldListener() {
 
 		return new FocusAdapter() {
@@ -184,7 +195,6 @@ public class Benutzer {
 
 				} else {
 					loginButton.setEnabled(true);
-					registrierenButton.setEnabled(false);
 					loginButton.requestFocus();
 				}
 			}

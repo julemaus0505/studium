@@ -69,8 +69,20 @@ public class Senden extends JFrame {
 				// dann das senden starten
 				senden();
 
+				// wurde auf weiterleiten geklickt?
+			} else if (event.getActionCommand().equals("weiterleiten")) {
+
+				// dann Weiterleiten starten
+				weiterleiten();
+
+				// wurde auf beantworten geklickt?
+			} else if (event.getActionCommand().equals("beantworten")) {
+
+				// dann beantworten starten
+				beantworten();
 			}
 		}
+
 	}
 
 	// der Konstruktor
@@ -173,6 +185,7 @@ public class Senden extends JFrame {
 					// und anzeigen
 					// übergeben wird der Frame der äußeren Klasse
 					new Anzeige(Senden.this, true, ID, empfaenger, betreff, inhalt);
+
 				}
 			}
 		});
@@ -225,10 +238,29 @@ public class Senden extends JFrame {
 	private void senden() {
 
 		// den Dialog für eine neue Nachricht modal anzeigen
-		new NeueNachricht(this, true, email, password);
+		new NeueNachricht(this, true, email, password).setVisible(true);
 
 		// nach dem Versenden lassen wir die Anzeige aktualisieren
 		tabelleAktualisieren();
 	}
 
+	private void weiterleiten() {
+		int zeile = tabelle.getSelectedRow();
+		if (zeile == -1) {
+			JOptionPane.showMessageDialog(this, "Bitte eine Nachricht auswählen.");
+		} else {
+			new NeueNachricht(this, true, email, password, (String) tabelle.getValueAt(zeile, 2),
+					(String) tabelle.getValueAt(zeile, 3)).setVisible(true);
+		}
+	}
+
+	private void beantworten() {
+		int zeile = tabelle.getSelectedRow();
+		if (zeile == -1) {
+			JOptionPane.showMessageDialog(this, "Bitte eine Nachricht auswählen.");
+		} else {
+			new NeueNachricht(this, true, email, password, (String) tabelle.getValueAt(zeile, 2),
+					(String) tabelle.getValueAt(zeile, 3), (String) tabelle.getValueAt(zeile, 1)).setVisible(true);
+		}
+	}
 }

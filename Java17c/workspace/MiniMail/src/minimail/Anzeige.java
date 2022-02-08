@@ -40,7 +40,7 @@ public class Anzeige extends JDialog {
 			}	
 		}
 	}
-
+	
 	// der Konstruktor
 	public Anzeige(JFrame parent, boolean modal, String ID, String empfaenger, String betreff, String inhalt) {
 		super(parent, modal);
@@ -54,6 +54,7 @@ public class Anzeige extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
 
+	// initGui Methode für die Grafik
 	private void initGui(String iD, String empfaenger, String betreff, String inhalt) {
 		setLayout(new BorderLayout());
 		JPanel oben = new JPanel();

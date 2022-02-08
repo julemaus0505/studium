@@ -14,8 +14,11 @@ import java.util.Properties;
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -44,7 +47,7 @@ public class Empfangen extends JFrame {
 		// für das Öffnen des Fensters
 		@Override
 		public void windowOpened(WindowEvent event) {
-			
+
 			// die Methode nachrichtenEmpfangen() aufrufen
 			nachrichtenEmpfangen();
 		}
@@ -58,11 +61,13 @@ public class Empfangen extends JFrame {
 		this.email = email;
 		this.password = password;
 
+		// titel setzten
 		setTitle("E-Mail empfangen");
 
 		// wir nehmen ein Border-Layout
 		setLayout(new BorderLayout());
 
+		// Größe setzten und anzeigen
 		setVisible(true);
 		setSize(700, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -73,6 +78,7 @@ public class Empfangen extends JFrame {
 		// die Tabelle erstellen und anzeigen
 		tabelleErstellen();
 		tabelleAktualisieren();
+		
 	}
 
 	// zum Erstellen der Tabelle
@@ -149,7 +155,6 @@ public class Empfangen extends JFrame {
 			// Verbindung herstellen und Ergebnismenge beschaffen
 			verbindung = MiniDBTools.oeffnenDB("org.apache.derby.jdbc.EmbeddedDriver", "jdbc:derby:mailDB");
 			ergebnisMenge = MiniDBTools.liefereErgebnis(verbindung, "SELECT * FROM empfangen");
-			
 
 			// die Einträge in die Tabelle schreiben
 			while (ergebnisMenge.next()) {
@@ -171,7 +176,7 @@ public class Empfangen extends JFrame {
 			ergebnisMenge.close();
 			verbindung.close();
 			MiniDBTools.schliessenDB("jdbc:derby:");
-			
+
 		} catch (Exception exception) {
 			JOptionPane.showMessageDialog(this, "Problem: \n" + exception.toString());
 		}
@@ -187,7 +192,6 @@ public class Empfangen extends JFrame {
 
 	private void nachrichtenAbholen() {
 
-		
 		// der Server
 		String server = "pop.gmail.com";
 
@@ -241,22 +245,23 @@ public class Empfangen extends JFrame {
 			// den Ordner schließen
 			// durch das Argument true werden die Nachrichten gelöscht
 			posteingang.close(true);
-			
+
 		} catch (Exception exception) {
 			JOptionPane.showMessageDialog(this, "Problem: \n" + exception.toString());
 		}
 	}
 
 	private void nachrichtVerarbeiten(Message nachricht) {
+
 		try {
+			// den ersten Sender beschaffen
+			String sender = nachricht.getFrom()[0].toString();
+
+			// den Betreff
+			String betreff = nachricht.getSubject();
+
 			// ist es einfacher Text?
 			if (nachricht.isMimeType("text/plain")) {
-
-				// den ersten Sender beschaffen
-				String sender = nachricht.getFrom()[0].toString();
-
-				// den Betreff
-				String betreff = nachricht.getSubject();
 
 				// den Inhalt
 				String inhalt = nachricht.getContent().toString();
@@ -267,13 +272,27 @@ public class Empfangen extends JFrame {
 				// und zum Löschen markieren
 				nachricht.setFlag(Flags.Flag.DELETED, true);
 
-			}
+			} else if (nachricht.isMimeType("multipart/*")) {
+				Multipart mp = (Multipart) nachricht.getContent();
 
+				if (mp.getCount() > 1) {
+					Part part = mp.getBodyPart(0);
+					if (part.getContent() instanceof String) {
+
+						String inhalt = part.getContent().toString();
+						// und die Nachricht speichern
+						nachrichtSpeichern(sender, betreff, inhalt);
+
+						// und zum Löschen markieren
+						nachricht.setFlag(Flags.Flag.DELETED, true);
+					}
+				}
+			}
 			// sonst geben wir eine Meldung aus
 			else
 				JOptionPane.showMessageDialog(this,
 						"Der Typ der Nachricht " + nachricht.getContentType() + "kann nicht verarbeitet werden.");
-		
+
 		} catch (Exception exception) {
 			JOptionPane.showMessageDialog(this, "Problem: \n" + exception.toString());
 		}
@@ -306,7 +325,7 @@ public class Empfangen extends JFrame {
 
 			// und die Datenbank schließen
 			MiniDBTools.schliessenDB("jdbc:derby:");
-		
+
 		} catch (Exception exception) {
 			JOptionPane.showMessageDialog(this, "Problem: \n" + exception.toString());
 		}

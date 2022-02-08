@@ -22,6 +22,7 @@ public class ErsteMail {
 	private String email;
 	private String password;
 
+	// der Konstruktor
 	ErsteMail(String email, String password) {
 		this.email = email;
 		this.password = password;
@@ -93,6 +94,7 @@ public class ErsteMail {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
+		// Neu Logindaten in eine Datei schreiben
 		try (FileInputStream fileInputStream = new FileInputStream("login.properties")) {
 			Properties properties = new Properties();
 			properties.load(fileInputStream);

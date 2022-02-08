@@ -66,7 +66,7 @@ public class MiniMailStart extends JFrame {
 		this.email = email;
 		this.password = password;
 
-		// ein FlowLayout
+		// ein MigLayout
 		setLayout(new MigLayout("w 350, h 250", "[center, 50%][center, 50%]"));
 
 		// Label für die Schaltflächen
@@ -124,21 +124,18 @@ public class MiniMailStart extends JFrame {
 	}
 
 	private void loescheBenutzer() {
-		
+
 		if (JOptionPane.showConfirmDialog(this, "Möchten Sie die Benutzer löschen") == JOptionPane.YES_OPTION) {
 			MailDBManager.fuehreSqlUpdateAus("DELETE FROM benutzer");
-			
-		} else {
-			
 		}
-		
-
 	}
 
 	private void loescheEmail() {
-		MailDBManager.fuehreSqlUpdateAus("DELETE FROM empfangen");
-		
-
+		if (JOptionPane.showConfirmDialog(this,
+				"Möchten Sie die Empfangenen und gesendeten E-Mails löschen") == JOptionPane.YES_OPTION) {
+			MailDBManager.fuehreSqlUpdateAus("DELETE FROM empfangen");
+			MailDBManager.fuehreSqlUpdateAus("DELETE FROM gesendet");
+		}
 	}
 
 	private void beenden() {
