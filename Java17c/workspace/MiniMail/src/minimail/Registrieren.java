@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Neue Klasse für die Registrierung erstellt 
+ * Neue Klasse für die Registrierung erstellt zur Teilaufgabe 1 
  * 
  * @author Julia Petersen
  * 

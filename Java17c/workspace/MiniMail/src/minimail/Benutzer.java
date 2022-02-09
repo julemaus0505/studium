@@ -20,8 +20,9 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * 
- * @author Julia Petersen Neue Klasse erstellt Benutzer erstellt, sie dient
+ * Neue Klasse erstellt zur Teilaufgabe 1
+ *
+ * @author Julia Petersen  Benutzer Klasse sie dient
  *         dafür das der Benutzer sich über eine Maske einloggen. Sie hat ein
  *         Hauptfenster, in dem dann die Benutzerdaten in dem Feld E-Mail und
  *         Passwort eingeben werden müssen, um sich einzuloggen. wenn der

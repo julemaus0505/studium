@@ -92,6 +92,8 @@ public class Senden extends JFrame {
 
 		// den Title setzen
 		setTitle("E-Mail senden");
+		
+		
 
 		// wir nehmen ein Border-Layout
 		setLayout(new BorderLayout());
@@ -235,7 +237,7 @@ public class Senden extends JFrame {
 	}
 
 	// zum Senden
-	private void senden() {
+	public void senden() {
 
 		// den Dialog für eine neue Nachricht modal anzeigen
 		new NeueNachricht(this, true, email, password).setVisible(true);
@@ -245,7 +247,7 @@ public class Senden extends JFrame {
 	}
 
 	// zum Weiterleiten
-	private void weiterleiten() {
+	public void weiterleiten() {
 
 		// Überprüfen welche Zeile selektiert wurde, davon wird dann die Nachricht der
 		// Betreff von der alten Nachricht in die neuen Felder übernommen
@@ -259,7 +261,7 @@ public class Senden extends JFrame {
 	}
 
 	// zum Beantworten
-	private void beantworten() {
+	public void beantworten() {
 
 		// Überprüfen welche Zeile selektiert wurde, davon wird dann die Nachricht der
 		// Betreff und die Absender Adresse von der alten Nachricht in die neuen Felder

@@ -1,6 +1,7 @@
 package minimail;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -18,11 +19,14 @@ import javax.mail.Multipart;
 import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
-
+import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
 public class Empfangen extends JFrame {
@@ -34,14 +38,66 @@ public class Empfangen extends JFrame {
 	private String email;
 	private String password;
 
+	// für die Aktion
+	private MeineAktionen sendenAct;
+	private MeineAktionen weiterleitenAct;
+	private MeineAktionen beantwortenAct;
+
 	// für die Tabelle
 	private JTable tabelle;
 
 	// für das Modell
 	private DefaultTableModel modell;
 
-	// eine innere Klasse für den WindowListener und den ActionListener
-	// die Klasse ist von WindowAdapter abgeleitet
+	// eine Innere Klasse für die Aktionen
+	class MeineAktionen extends AbstractAction {
+
+		// der Konstruktor
+		public MeineAktionen(String text, ImageIcon icon, String beschreibung, KeyStroke shortcut, String actionText) {
+
+			// den Konstruktor der übergeordneten Klasse mit dem Text und dem Icon aufrufen
+			super(text, icon);
+
+			// die Beschreibung setzen für den Bildschirmtipp
+			putValue(SHORT_DESCRIPTION, beschreibung);
+
+			// den Shortcut
+			putValue(ACCELERATOR_KEY, shortcut);
+
+			// das ActionCommand
+			putValue(ACTION_COMMAND_KEY, actionText);
+
+		}
+
+		// automatisch über Eclipse ergänzt
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+
+			// wurde auf Senden geklickt?
+			if (event.getActionCommand().equals("senden")) {
+
+				// dann das senden starten
+				senden();
+
+				// wurde auf weiterleiten geklickt?
+			} else if (event.getActionCommand().equals("weiterleiten")) {
+
+				// dann Weiterleiten starten
+				weiterleiten();
+
+				// wurde auf beantworten geklickt?
+			} else if (event.getActionCommand().equals("beantworten")) {
+
+				// dann beantworten starten
+				beantworten();
+			}
+		}
+	}
+
+// eine innere Klasse für den WindowListener und den ActionListener
+// die Klasse ist von WindowAdapter abgeleitet
 	class MeinWindowAdapter extends WindowAdapter {
 
 		// für das Öffnen des Fensters
@@ -51,6 +107,7 @@ public class Empfangen extends JFrame {
 			// die Methode nachrichtenEmpfangen() aufrufen
 			nachrichtenEmpfangen();
 		}
+
 	}
 
 	// der Konstruktor
@@ -65,6 +122,21 @@ public class Empfangen extends JFrame {
 		// wir nehmen ein Border-Layout
 		setLayout(new BorderLayout());
 
+		// die Aktionen für Neue E-Mail erstellen
+		sendenAct = new MeineAktionen("Neue E-Mail", new ImageIcon("icons/mail-generic.gif"),
+				"Erstellt eine neue E-Mail", null, "senden");
+
+		// die Aktionen für E-Mail weiterleiten erstellen
+		weiterleitenAct = new MeineAktionen("Email Weiterleiten", new ImageIcon("icons/mail-forward.gif"),
+				"Leitet eine Email weiter", null, "weiterleiten");
+
+		// die Aktionen für E-Mail beantwoten erstellen
+		beantwortenAct = new MeineAktionen("Email Beantworten", new ImageIcon("icons/mail-reply.gif"),
+				"Email beantworten", null, "beantworten");
+
+		// die Symbolleiste oben einfügen
+		add(symbolleiste(), BorderLayout.NORTH);
+
 		// Größe setzten und anzeigen
 		setVisible(true);
 		setSize(700, 300);
@@ -76,7 +148,20 @@ public class Empfangen extends JFrame {
 		// die Tabelle erstellen und anzeigen
 		tabelleErstellen();
 		tabelleAktualisieren();
-		
+
+	}
+
+	// die Symbolleiste erzeugen und zurückgeben
+	private JToolBar symbolleiste() {
+		JToolBar leiste = new JToolBar();
+
+		// die Symbole über die Aktionen einbauen
+		leiste.add(sendenAct);
+		leiste.add(weiterleitenAct);
+		leiste.add(beantwortenAct);
+
+		// die Leiste zurückgeben
+		return (leiste);
 	}
 
 	// zum Erstellen der Tabelle
@@ -278,7 +363,7 @@ public class Empfangen extends JFrame {
 					if (part.getContent() instanceof String) {
 
 						String inhalt = part.getContent().toString();
-						
+
 						// und die Nachricht speichern
 						nachrichtSpeichern(sender, betreff, inhalt);
 
@@ -327,6 +412,45 @@ public class Empfangen extends JFrame {
 
 		} catch (Exception exception) {
 			JOptionPane.showMessageDialog(this, "Problem: \n" + exception.toString());
+		}
+	}
+
+	// zum Senden
+	private void senden() {
+
+		// den Dialog für eine neue Nachricht modal anzeigen
+		new NeueNachricht(this, true, email, password).setVisible(true);
+
+		// nach dem Versenden lassen wir die Anzeige aktualisieren
+		tabelleAktualisieren();
+	}
+
+	// zum Weiterleiten
+	private void weiterleiten() {
+
+		// Überprüfen welche Zeile selektiert wurde, davon wird dann die Nachricht der
+		// Betreff von der alten Nachricht in die neuen Felder übernommen
+		int zeile = tabelle.getSelectedRow();
+		if (zeile == -1) {
+			JOptionPane.showMessageDialog(this, "Bitte eine Nachricht auswählen.");
+		} else {
+			new NeueNachricht(this, true, email, password, (String) tabelle.getValueAt(zeile, 2),
+					(String) tabelle.getValueAt(zeile, 3)).setVisible(true);
+		}
+	}
+
+	// zum Beantworten
+	private void beantworten() {
+
+		// Überprüfen welche Zeile selektiert wurde, davon wird dann die Nachricht der
+		// Betreff und die Absender Adresse von der alten Nachricht in die neuen Felder
+		// übernommen
+		int zeile = tabelle.getSelectedRow();
+		if (zeile == -1) {
+			JOptionPane.showMessageDialog(this, "Bitte eine Nachricht auswählen.");
+		} else {
+			new NeueNachricht(this, true, email, password, (String) tabelle.getValueAt(zeile, 2),
+					(String) tabelle.getValueAt(zeile, 3), (String) tabelle.getValueAt(zeile, 1)).setVisible(true);
 		}
 	}
 }
