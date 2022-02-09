@@ -11,7 +11,7 @@ public class MiniMailMain {
 		// Neu überprüfung der Datenbankverbindung
 		// Zeige Login Fenster an, wenn keine Verbindung hergestellt werden kann gibt es eine Meldung.
 		try {
-			MailDBManager.ueberpruefeDatenbank();
+			MailDBManager.ueberpruefeBenutzerDatenbank();
 			Benutzer benutzer = new Benutzer();
 			benutzer.zeigeLoginFenster();
 		

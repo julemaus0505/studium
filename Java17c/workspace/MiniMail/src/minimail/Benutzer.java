@@ -20,17 +20,12 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Neue Klasse erstellt zur Teilaufgabe 1
+ * Teilaufgabe 1
  *
- * @author Julia Petersen  Benutzer Klasse sie dient
- *         dafür das der Benutzer sich über eine Maske einloggen. Sie hat ein
- *         Hauptfenster, in dem dann die Benutzerdaten in dem Feld E-Mail und
- *         Passwort eingeben werden müssen, um sich einzuloggen. wenn der
- *         Loginbutton geklickt wird, wird in der Datenbank nach dem Benutzer
- *         geschaut, ob es ihn in der Datenbank gibt. Wenn ja, wird das Mail
- *         Programm geöffnet. Andernfalss muss der Anwender sich erst
- *         registrieren.
+ * Die Klasse stellt die Loginfunktion bereit.
+ * Die Benutzereingeben werden mit den Einträgen in der Datenbank überprüft.
  *
+ * @author Julia Petersen  
  */
 
 public class Benutzer {
@@ -41,11 +36,6 @@ public class Benutzer {
 	private JButton loginButton;
 	private JButton registrierenButton;
 	private JButton abbrechenButton;
-
-	// der Konstruktor
-	public Benutzer() {
-
-	}
 
 	// Mehtode kümmert sich um das Login Fenster
 	public void zeigeLoginFenster() {
@@ -112,20 +102,14 @@ public class Benutzer {
 			}
 		});
 
-		// Neu, wenn der Loginbutton geklickt wurde, wird überprüft, ob es denn Benutzer
-		// schon in der Datenbank gibt
+		// wenn der Loginbutton geklickt wurde, wird überprüft, ob es den Benutzer
+		// bereits in der Datenbank gibt
 		loginButton.addActionListener(new ActionListener() {
 
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent event) {
 
-				// Eine neue Klasse für meine SQL Abfragen erstellt, und hier für die Abfrage
-				// genutzt
-				// Prüfung der Benutzer eingaben, ob Benutzer in der Datenbank schon vorhanden
-				// ist.
-				// Wenn es den Benutzer noch nicht gibt, muss er sich erst registrieren, hier
-				// werden die entsprechenden Meldungen ausgegeben.
 				MailDBManager.fuehreSqlAus(
 						String.format("SELECT COUNT(*) FROM benutzer WHERE email = '%s' AND passwort = '%s'",
 								emailTextField.getText(), passwordField.getText()),
@@ -134,17 +118,13 @@ public class Benutzer {
 								if (daten != null && daten.next() && daten.getInt(1) != 0) {
 									loginFenster.setVisible(false);
 									new MiniMailStart("MiniMail", emailTextField.getText(), passwordField.getText());
-
 								} else {
-
 									JOptionPane.showMessageDialog(null,
 											"Login Fehlgeschlagen, bitte neu eingeben, oder sich erst registrieren!");
-
 								}
 							} catch (SQLException exception) {
 								JOptionPane.showMessageDialog(loginFenster,
 										"Eingegebene Login Daten stimmen nicht überein.");
-
 							}
 							return null;
 						});
@@ -194,8 +174,11 @@ public class Benutzer {
 
 	}
 
-	// TextField darf nicht leer sein
-	// die Methode für den Focus
+	/**
+	 * Die Methode erstellt einen {@link FocusListener} um Textfelder auf leer zu prüfen <br>
+	 * und steuert entsprechend den Login Button
+	 * @return erstellter {@link FocusListener}
+	 */
 	private FocusListener getPruefeTextFieldListener() {
 
 		return new FocusAdapter() {

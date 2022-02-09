@@ -20,13 +20,14 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Neue Klasse für die Registrierung erstellt zur Teilaufgabe 1 
+ * Teilaufgabe 1
  * 
- * @author Julia Petersen
- * 
- * Diese Klasse stellt das Registrierungsfenter da, so das sich der Benutzer in der Datenbank registrieren kann.
- * Wenn der Benutzer sich erfolgreich registrieren konnte wird das Programm geöffnet. 
+ * Diese Klasse stellt die Registrierungsfunktion zur Verfügung. Sofern der
+ * Benutzer sich erfolgreich registrieren konnte wird das Programm geöffnet. Die
+ * Funktion enthält ebenfalls eine Überprüfung um doppelte Registrierungen zu
+ * verhindern.
  *
+ * @author Julia Petersen
  */
 public class Registrieren {
 
@@ -37,16 +38,21 @@ public class Registrieren {
 	private JPasswordField passwortWiederholenPasswordField;
 	private JFrame registrierenFenster;
 
-	// Mehtode kümmert sich um das Fenster Registrieren
+	/**
+	 * Die Methode zeigt das Registrierungsfenster an.
+	 * 
+	 * @param loginFenster wiederanzeigen des Loginfensters nach Abbruch der
+	 *                     Registrierung
+	 */
 	public void zeigeRegistrierenFenster(JFrame loginFenster) {
 		registrierenFenster = new JFrame("Registrieren");
 		registrierenFenster.setLayout(new MigLayout("w 300, h 300"));
 		registrierenFenster.setResizable(false);
 
 		// für die Anzeige wo das Fenster angezeigt wird
-		final Dimension d = registrierenFenster.getToolkit().getScreenSize();
-		registrierenFenster.setLocation((int) ((d.getWidth() - registrierenFenster.getWidth()) / 5),
-				(int) ((d.getHeight() - registrierenFenster.getHeight()) / 5));
+		final Dimension dimension = registrierenFenster.getToolkit().getScreenSize();
+		registrierenFenster.setLocation((int) ((dimension.getWidth() - registrierenFenster.getWidth()) / 5),
+				(int) ((dimension.getHeight() - registrierenFenster.getHeight()) / 5));
 
 		// JLabel erstellt
 		JLabel registrierenLabel = new JLabel("JETZT REGISTRIEREN");
@@ -63,7 +69,8 @@ public class Registrieren {
 		emailLabel.setForeground(Color.WHITE);
 		passwortWiederholenLabel.setForeground(Color.WHITE);
 
-		// Layout dem TextField hinzugefügt und den Focus über den FocusListenner gesetzt
+		// Layout dem TextField hinzugefügt und den Focus über den FocusListenner
+		// gesetzt
 		emailTextField = new JTextField("", 30);
 		emailTextField.addFocusListener(getPruefeTextFieldListener());
 		passwordField = new JPasswordField("", 30);
@@ -91,16 +98,19 @@ public class Registrieren {
 			public void actionPerformed(ActionEvent event) {
 
 				// Eintrag in die Datenbank
-				if (pruefeBenutzereingaben(emailTextField.getText())) {
+				if (pruefeBenutzereingaben()) {
 					int naechsteId = MailDBManager.getNaechsteId("benutzer");
 					MailDBManager.fuehreSqlUpdateAus(
 							String.format("INSERT INTO benutzer (id, email, passwort) VALUES (%d, '%s', '%s')",
 									naechsteId, emailTextField.getText(), passwordField.getText()));
+					JOptionPane.showMessageDialog(registrierenFenster, "Willkommen die Registrierung hat geklappt.");
+					new MiniMailStart("MiniMail", emailTextField.getText(), passwordField.getText());
+					registrierenFenster.setVisible(false);
 				}
 			}
 		});
 
-		// Neu Abbrechen Button Login Fenster wird geöffnet und das Registrieren Fenster
+		// Abbrechen Button Login Fenster wird geöffnet und das Registrieren Fenster
 		// wird geschlossen
 		abbrechenButton.addActionListener(new ActionListener() {
 
@@ -112,7 +122,7 @@ public class Registrieren {
 			}
 		});
 
-		// Neu dem RegistrierenFenster die Node hinzufügen
+		// dem RegistrierenFenster die Komponenten hinzufügen
 		registrierenFenster.add(registrierenLabel, "spanx, center,wrap 10");
 		registrierenLabel.setFont(new Font("Arial", 20, 20));
 		registrierenFenster.add(emailLabel, "spanx,wrap 10");
@@ -126,10 +136,14 @@ public class Registrieren {
 		registrierenFenster.pack();
 		registrierenFenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		registrierenFenster.setVisible(true);
-
 	}
 
-	// Neu das TextField darf nicht leer sein
+	/**
+	 * Erstellt einen {@link FocusListener} um zu prüfen ob die Eingabefelder
+	 * gefüllt sind.
+	 * 
+	 * @return Erstelltes {@link FocusListener} - Objekt
+	 */
 	private FocusListener getPruefeTextFieldListener() {
 
 		return new FocusAdapter() {
@@ -148,45 +162,47 @@ public class Registrieren {
 		};
 	}
 
-	// Neu Email und Passwort überprüft
+	/**
+	 * Die Methode prüft die Benutzereingaben: <br>
+	 * email: gültige Syntax und ob bereits in der Datenbank vorhanden <br>
+	 * password: sind die Passwörter identisch <br>
+	 * 
+	 * @return true: wenn Eingaben OK <br>
+	 *         false: wenn Eingaben fehlerhaft
+	 */
 	@SuppressWarnings("deprecation")
-	private boolean pruefeBenutzereingaben(String emailAdresse) {
+	private boolean pruefeBenutzereingaben() {
 
-		// Prüfe ob Benutzer in der Datenbank schon vorhanden iat
-		Integer emailAdresseVorhanden = MailDBManager
-				.fuehreSqlAus(String.format("SELECT * FROM benutzer WHERE email = '%s'", emailAdresse), resultSet -> {
-
-					try {
-						if (resultSet.next()) {
-							return 1;
-						} else {
-
-							return 0;
-						}
-					} catch (SQLException exception) {
-						return -1;
-
-					}
-
-				});
-
-		// Prüfung ob benutzer mit der E-Mail Adresse schon registriert ist gbit es die Meldung
-		if (emailAdresseVorhanden == 1) {
-			JOptionPane.showMessageDialog(registrierenFenster, "Die E-Mailadresse ist bereits registriet.");
-
-		// Prüfung ob in der E-Mail Adresse eine @ und die anderen zeichen vorhenden sind
-		} else if (!emailAdresse.matches("^[(a-zA-Z-0-9-\\_\\+\\.)]+@[(a-z-A-z)]+\\.[(a-zA-z)]{2,3}$")
+		// Prüfung ob in der E-Mail Adresse eine @ und die anderen zeichen vorhenden
+		// sind
+		if (!emailTextField.getText().matches("^[(a-zA-Z-0-9-\\_\\+\\.)]+@[(a-z-A-z)]+\\.[(a-zA-z)]{2,3}$")
 				|| !passwordField.getText().equals(passwortWiederholenPasswordField.getText())) {
 
 			JOptionPane.showMessageDialog(registrierenFenster,
 					"Die Email Adresse ist ungültig, oder Passwörter simmen nicht über ein.");
-
-		} else {
-			JOptionPane.showMessageDialog(registrierenFenster, "Willkommen die Registrierung hat geklappt.");
-			new MiniMailStart("MiniMail", emailAdresse, emailAdresse);
-			registrierenFenster.setVisible(false);
-			return true;
+			return false;
 		}
-		return false;
+
+		// Prüfe ob Benutzer in der Datenbank schon vorhanden iat
+		Integer emailAdresseVorhanden = MailDBManager.fuehreSqlAus(
+				String.format("SELECT * FROM benutzer WHERE email = '%s'", emailTextField.getText()), resultSet -> {
+					try {
+						if (resultSet.next()) {
+							return 1;
+						} else {
+							return 0;
+						}
+					} catch (SQLException exception) {
+						return -1;
+					}
+				});
+
+		// Prüfung ob benutzer mit der E-Mail Adresse schon registriert ist gbit es die
+		// Meldung
+		if (emailAdresseVorhanden == 1) {
+			JOptionPane.showMessageDialog(registrierenFenster, "Die E-Mailadresse ist bereits registriet.");
+			return false;
+		}
+		return true;
 	}
 }

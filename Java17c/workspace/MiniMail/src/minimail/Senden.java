@@ -25,6 +25,8 @@ public class Senden extends JFrame {
 
 	// für die Aktion
 	private MeineAktionen sendenAct;
+	
+	// Teilaufgabe 2
 	private MeineAktionen weiterleitenAct;
 	private MeineAktionen beantwortenAct;
 
@@ -69,9 +71,11 @@ public class Senden extends JFrame {
 				// dann das senden starten
 				senden();
 
+				// Teilaufgabe 2
 				// wurde auf weiterleiten geklickt?
 			} else if (event.getActionCommand().equals("weiterleiten")) {
 
+				// Teilaufgabe 2
 				// dann Weiterleiten starten
 				weiterleiten();
 
@@ -102,10 +106,12 @@ public class Senden extends JFrame {
 		sendenAct = new MeineAktionen("Neue E-Mail", new ImageIcon("icons/mail-generic.gif"),
 				"Erstellt eine neue E-Mail", null, "senden");
 
+		// Teilaufgabe 2
 		// die Aktionen für E-Mail weiterleiten erstellen
 		weiterleitenAct = new MeineAktionen("Email Weiterleiten", new ImageIcon("icons/mail-forward.gif"),
 				"Leitet eine Email weiter", null, "weiterleiten");
 
+		// Teilaufgabe 2
 		// die Aktionen für E-Mail beantwoten erstellen
 		beantwortenAct = new MeineAktionen("Email Beantworten", new ImageIcon("icons/mail-reply.gif"),
 				"Email beantworten", null, "beantworten");
@@ -129,6 +135,7 @@ public class Senden extends JFrame {
 
 		// die Symbole über die Aktionen einbauen
 		leiste.add(sendenAct);
+		// Teilaufgabe 2
 		leiste.add(weiterleitenAct);
 		leiste.add(beantwortenAct);
 
@@ -246,11 +253,11 @@ public class Senden extends JFrame {
 		tabelleAktualisieren();
 	}
 
+	// Teilaufgabe 2
 	// zum Weiterleiten
 	public void weiterleiten() {
 
-		// Überprüfen welche Zeile selektiert wurde, davon wird dann die Nachricht der
-		// Betreff von der alten Nachricht in die neuen Felder übernommen
+		// Überprüft ob eine Zeile selektiert wurde. Falls ja wird die Selektierte Nachricht zum Weiterleiten verwendet
 		int zeile = tabelle.getSelectedRow();
 		if (zeile == -1) {
 			JOptionPane.showMessageDialog(this, "Bitte eine Nachricht auswählen.");
@@ -260,12 +267,11 @@ public class Senden extends JFrame {
 		}
 	}
 
+	// Teilaufgabe 2
 	// zum Beantworten
 	public void beantworten() {
 
-		// Überprüfen welche Zeile selektiert wurde, davon wird dann die Nachricht der
-		// Betreff und die Absender Adresse von der alten Nachricht in die neuen Felder
-		// übernommen
+		// Überprüft ob eine Zeile selektiert wurde. Falls ja wird die Selektierte Nachricht zum Beantworten verwendet
 		int zeile = tabelle.getSelectedRow();
 		if (zeile == -1) {
 			JOptionPane.showMessageDialog(this, "Bitte eine Nachricht auswählen.");

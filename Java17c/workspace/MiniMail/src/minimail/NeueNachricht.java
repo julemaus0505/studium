@@ -64,7 +64,18 @@ public class NeueNachricht extends JDialog {
 		}
 	}
 
-	// der Konstruktor für Beantworten
+	
+	/**
+	 * Teilaufgabe 2
+	 * Konstruktor für Beantworten
+	 * @param parent für die Position des Fensters
+	 * @param modal gibt an ob das Fenster modal ist
+	 * @param absenderEmail enthält die Absender Email
+	 * @param password enthält das Passwort passend zur Absender Email
+	 * @param betreff enthält den Betreff der alten Nachricht
+	 * @param inhalt enthält den Inhalt der alten Nachricht
+	 * @param empfaenger enthält den Empfänger
+	 */
 	public NeueNachricht(JFrame parent, boolean modal, String absenderEmail, String password, String betreff,
 			String inhalt, String empfaenger) {
 		this(parent, modal, absenderEmail, password);
@@ -78,7 +89,17 @@ public class NeueNachricht extends JDialog {
 
 	}
 
-	// der Konstruktor für Weiterleiten
+	
+	/**
+	 * Teilaufgabe 2
+	 * der Konstruktor für Weiterleiten
+	 * @param parent für die Position des Fensters
+	 * @param modal gibt an ob das Fenster modal ist
+	 * @param absenderEmail enthält die Absender Email
+	 * @param password enthält das Passwort passend zur Absender Email
+	 * @param betreff enthält den Betreff der alten Nachricht
+	 * @param inhalt enthält den Inhalt der alten Nachricht
+	 */
 	public NeueNachricht(JFrame parent, boolean modal, String absenderEmail, String password, String betreff,
 			String inhalt) {
 		this(parent, modal, absenderEmail, password);

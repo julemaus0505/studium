@@ -9,15 +9,9 @@ import java.util.function.Function;
 import javax.swing.JOptionPane;
 
 /**
- * Neue Klasse erstellt:
+ * * Diese Klasse stellt Methoden zum Ausführen von SQL - Anweisungen bereit.
  * 
  * @author Julia Petersen
- * 
- * Diese Klasse habe ich für meine SQL Anweisungen geschrieben, zuerst wird die Verbindung hergestellt, und dann
- * Überprüft, ob es die Tabelle gibt. Die Methode fuehreSqlAus führt meine SQL Befehle aus. Zum Beispiel, ob der Benutzer
- * In der Datenbank schon existiert. Bei fuehreSqlUpdateAus werden neue Benutzer in der Datenbank hinzugefügt.
- * Bei getNaechsteId hole ich mir die nächste ID, da die ID auch nur einmal vergeben werden darf.
- *  
  */
 public class MailDBManager {
 
@@ -27,18 +21,23 @@ public class MailDBManager {
 
 	private static Connection verbindung;
 
-	public static void ueberpruefeDatenbank() throws SQLException {
+	/**
+	 * Die Methode prüft ob es die Tabelle bnutzer gibt und erstellt sie
+	 * gegebenenfalls
+	 * 
+	 * @throws SQLException
+	 */
+	public static void ueberpruefeBenutzerDatenbank() throws SQLException {
 
 		// Datenbankverbindung herstellen
-		verbindung = MiniDBTools.oeffnenDB(DATENBANK_TREIBER, DATENBANK_URL);
-
+		stelleDbVerbindungHer();
 		Statement statement = verbindung.createStatement();
 		try {
 			// Überprüfen ob Tabelle vorhanden ist
 			statement.executeQuery("SELECT * FROM benutzer");
 
 		} catch (SQLException exception) {
-		
+
 			// Tabelle anlegen
 			statement.executeUpdate("""
 					CREATE TABLE benutzer (
@@ -52,8 +51,16 @@ public class MailDBManager {
 		}
 	}
 
-	// führt die Methode fuehreSqlAus 
+	/**
+	 * Die Methode führt die angegebene SELECT - Anweisung aus. In der angegebenen
+	 * Funktion wird das {@link ResultSet} ausgewertet
+	 * 
+	 * @param sql      Anweisung die ausgefürt werden soll
+	 * @param function zum Auswerten des {@link ResultSet}
+	 * @return Rückgabewert der Funktion
+	 */
 	public static Integer fuehreSqlAus(String sql, Function<ResultSet, Integer> function) {
+		stelleDbVerbindungHer();
 		try (Statement statement = verbindung.createStatement()) {
 			ResultSet resultSet = statement.executeQuery(sql);
 			return function.apply(resultSet);
@@ -64,9 +71,15 @@ public class MailDBManager {
 		}
 		return null;
 	}
-	
-	// führt die Methode fuehreSqlUpdateAus 
+
+	/**
+	 * Die Methode führt die angegebene DELETE || UPDATE || INSERT - Anweisung aus
+	 * 
+	 * @param sql Anweisung die ausgefürt werden soll
+	 * @return die Anzahl geänderter Zeilen
+	 */
 	public static int fuehreSqlUpdateAus(String sql) {
+		stelleDbVerbindungHer();
 		try (Statement statement = verbindung.createStatement()) {
 			return statement.executeUpdate(sql);
 
@@ -77,7 +90,12 @@ public class MailDBManager {
 		}
 	}
 
-	// führt die Methode getNaechsteId aus 
+	/**
+	 * Die Methode ermittelt die nächste ID
+	 * 
+	 * @param tabellenname dessen nächste ID ermittelt werden soll
+	 * @return die nächste ID oder <code>NULL</code>
+	 */
 	public static Integer getNaechsteId(String tabellenname) {
 		Integer count = fuehreSqlAus("SELECT COUNT(*) FROM " + tabellenname, resultSet -> {
 			try {
@@ -88,5 +106,15 @@ public class MailDBManager {
 			}
 		});
 		return count;
+	}
+
+	private static void stelleDbVerbindungHer() {
+		try {
+			if (verbindung == null || verbindung.isClosed()) {
+				verbindung = MiniDBTools.oeffnenDB(DATENBANK_TREIBER, DATENBANK_URL);
+			}
+		} catch (SQLException exception) {
+			JOptionPane.showMessageDialog(null, "Fehler beim Herstellen der Datenbank - Verbindung");
+		}
 	}
 }
