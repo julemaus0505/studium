@@ -8,9 +8,20 @@ import java.util.function.Function;
 
 import javax.swing.JOptionPane;
 
-// NEUE Klasse erstellt
+/**
+ * Neue Klasse erstellt:
+ * 
+ * @author Julia Petersen
+ * 
+ * Diese Klasse habe ich für meine SQL Anweisungen geschrieben, zuerst wird die Verbindung hergestellt, und dann
+ * Überprüft, ob es die Tabelle gibt. Die Methode fuehreSqlAus führt meine SQL Befehle aus. Zum Beispiel, ob der Benutzer
+ * In der Datenbank schon existiert. Bei fuehreSqlUpdateAus werden neue Benutzer in der Datenbank hinzugefügt.
+ * Bei getNaechsteId hole ich mir die nächste ID, da die ID auch nur einmal vergeben werden darf.
+ *  
+ */
 public class MailDBManager {
 
+	// statische Klassenvariablen
 	private static final String DATENBANK_URL = "jdbc:derby:mailDB";
 	private static final String DATENBANK_TREIBER = "org.apache.derby.jdbc.EmbeddedDriver";
 
@@ -41,7 +52,7 @@ public class MailDBManager {
 		}
 	}
 
-	//
+	// führt die Methode fuehreSqlAus 
 	public static Integer fuehreSqlAus(String sql, Function<ResultSet, Integer> function) {
 		try (Statement statement = verbindung.createStatement()) {
 			ResultSet resultSet = statement.executeQuery(sql);
@@ -53,8 +64,8 @@ public class MailDBManager {
 		}
 		return null;
 	}
-
-	//
+	
+	// führt die Methode fuehreSqlUpdateAus 
 	public static int fuehreSqlUpdateAus(String sql) {
 		try (Statement statement = verbindung.createStatement()) {
 			return statement.executeUpdate(sql);
@@ -66,7 +77,7 @@ public class MailDBManager {
 		}
 	}
 
-	//
+	// führt die Methode getNaechsteId aus 
 	public static Integer getNaechsteId(String tabellenname) {
 		Integer count = fuehreSqlAus("SELECT COUNT(*) FROM " + tabellenname, resultSet -> {
 			try {
@@ -77,7 +88,5 @@ public class MailDBManager {
 			}
 		});
 		return count;
-
 	}
-
 }

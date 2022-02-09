@@ -15,37 +15,37 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Anzeige extends JDialog {
-	
+
 	// automatisch über Eclipse erzeugt
 	private static final long serialVersionUID = 7637369405383432965L;
 
 	// für die Eingabefelder
-	private JTextField empfaengerFeld;
-	private JTextField betreffFeld;
-	private JTextArea inhaltFeld;
-	
+	private JTextField empfaengerTextField;
+	private JTextField betreffTextField;
+	private JTextArea inhaltTextArea;
+
 	// für die Schaltflächen
-	private JButton ok;
-	
+	private JButton okButton;
+
 	// die innere Klasse für den ActionListener
 	class NeuListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-	
+
 			// wurde auf OK geklickt?
 			if (event.getActionCommand().equals("ok")) {
-				
+
 				// dann Dialog schließen
 				dispose();
-			}	
+			}
 		}
 	}
-	
+
 	// der Konstruktor
 	public Anzeige(JFrame parent, boolean modal, String ID, String empfaenger, String betreff, String inhalt) {
 		super(parent, modal);
 		setTitle("Anzeige");
-		
+
 		// die Oberfläche erstellen
 		initGui(ID, empfaenger, betreff, inhalt);
 
@@ -60,37 +60,37 @@ public class Anzeige extends JDialog {
 		JPanel oben = new JPanel();
 		oben.setLayout(new GridLayout(0, 2));
 		oben.add(new JLabel("Empfänger:"));
-		empfaengerFeld = new JTextField(empfaenger);
-		oben.add(empfaengerFeld);
+		empfaengerTextField = new JTextField(empfaenger);
+		oben.add(empfaengerTextField);
 		oben.add(new JLabel("Betreff:"));
-		betreffFeld = new JTextField(betreff);
-		oben.add(betreffFeld);
+		betreffTextField = new JTextField(betreff);
+		oben.add(betreffTextField);
 		add(oben, BorderLayout.NORTH);
-		inhaltFeld = new JTextArea(inhalt);
-		
+		inhaltTextArea = new JTextArea(inhalt);
+
 		// den Zeilenumbruch aktivieren
-		inhaltFeld.setLineWrap(true);
-		inhaltFeld.setWrapStyleWord(true);
-		
+		inhaltTextArea.setLineWrap(true);
+		inhaltTextArea.setWrapStyleWord(true);
+
 		// das Feld setzen wir in ein Scrollpane
-		JScrollPane scroll = new JScrollPane(inhaltFeld);
+		JScrollPane scroll = new JScrollPane(inhaltTextArea);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		add(scroll);
 
 		// die Felder können nicht bearbeitet werden
-		empfaengerFeld.setEditable(false);
-		betreffFeld.setEditable(false);
-		inhaltFeld.setEditable(false);
+		empfaengerTextField.setEditable(false);
+		betreffTextField.setEditable(false);
+		inhaltTextArea.setEditable(false);
 		JPanel unten = new JPanel();
-		
+
 		// die Schaltfläche
-		ok = new JButton("OK");
-		ok.setActionCommand("ok");
+		okButton = new JButton("OK");
+		okButton.setActionCommand("ok");
 
 		NeuListener listener = new NeuListener();
-		ok.addActionListener(listener);
+		okButton.addActionListener(listener);
 
-		unten.add(ok);
+		unten.add(okButton);
 		add(unten, BorderLayout.SOUTH);
 
 		// anzeigen

@@ -21,20 +21,22 @@ import net.miginfocom.swing.MigLayout;
 
 /**
  * 
- * @author Julia Petersen
- *
- *Neue Klasse Benutzer erstellt, sie dient dafür das der Benutzer sich über eine Maske einloggen.
- *Sie hat ein Hauptfenster, in dem dann die Benutzerdaten in dem Feld E-Mail und Passwort eingeben werden müssen, um sich einzuloggen.
- *wenn der Loginbutton geklickt wird, wird in der Datenbank nach dem Benutzer geschaut, ob es ihn in der Datenbank gibt.
- *Wenn ja, wird das Mail Programm geöffnet. Andernfalss muss der Anwender sich erst registrieren.
+ * @author Julia Petersen Neue Klasse erstellt Benutzer erstellt, sie dient
+ *         dafür das der Benutzer sich über eine Maske einloggen. Sie hat ein
+ *         Hauptfenster, in dem dann die Benutzerdaten in dem Feld E-Mail und
+ *         Passwort eingeben werden müssen, um sich einzuloggen. wenn der
+ *         Loginbutton geklickt wird, wird in der Datenbank nach dem Benutzer
+ *         geschaut, ob es ihn in der Datenbank gibt. Wenn ja, wird das Mail
+ *         Programm geöffnet. Andernfalss muss der Anwender sich erst
+ *         registrieren.
  *
  */
 
 public class Benutzer {
 
 	// Klassenvariablen
-	private JTextField emailField;
-	private JTextField passwordField;
+	private JTextField emailTextField;
+	private JPasswordField passwordField;
 	private JButton loginButton;
 	private JButton registrierenButton;
 	private JButton abbrechenButton;
@@ -64,7 +66,7 @@ public class Benutzer {
 		JLabel passwordLabel = new JLabel("Passwort");
 
 		// JTextField erstellt
-		emailField = new JTextField("", 20);
+		emailTextField = new JTextField("", 20);
 		passwordField = new JPasswordField("", 20);
 
 		// JButton erstellt und den zustand auf aus gesetzt
@@ -72,17 +74,18 @@ public class Benutzer {
 		loginButton.setEnabled(false);
 		registrierenButton = new JButton("Registrieren");
 		abbrechenButton = new JButton("Abbrechen");
+
 		JButton loginDatenEintragen = new JButton("Daten eingeben");
 
 		// ToolTips erstellt
-		emailField.setToolTipText("Bitte die E-mail eingeben");
+		emailTextField.setToolTipText("Bitte die E-mail eingeben");
 		passwordField.setToolTipText("Bitte Passwort eingeben");
 
 		// Focus auf die TextFields gesetzt
-		emailField.addFocusListener(getPruefeTextFieldListener());
+		emailTextField.addFocusListener(getPruefeTextFieldListener());
 		passwordField.addFocusListener(getPruefeTextFieldListener());
 
-		// Button Registrieren geklickt, dann öffnet sich das Registrierungsfenster
+		// Button Registrieren geklickt, dann öffnet sich das Registrierübungsfenster
 		// zugleich wird Login Fenster geschlossen
 		registrierenButton.addActionListener(new ActionListener() {
 
@@ -100,7 +103,7 @@ public class Benutzer {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				emailField.setText("petersenjulia60@gmail.com");
+				emailTextField.setText("petersenjulia60@gmail.com");
 				passwordField.setText("petersen2022");
 				loginButton.setEnabled(true);
 				registrierenButton.setEnabled(true);
@@ -108,21 +111,28 @@ public class Benutzer {
 			}
 		});
 
-		// Neu wenn der Loginbutton geklickt wurde, wird überprüft ob es den Benutzer schon in der Datenbank gibt
+		// Neu, wenn der Loginbutton geklickt wurde, wird überprüft, ob es denn Benutzer
+		// schon in der Datenbank gibt
 		loginButton.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent event) {
 
-				// eine neue Klasse für meine SQL Abfragen erstellt, und hier für die abfrage genutzt
+				// Eine neue Klasse für meine SQL Abfragen erstellt, und hier für die Abfrage
+				// genutzt
+				// Prüfung der Benutzer eingaben, ob Benutzer in der Datenbank schon vorhanden
+				// ist.
+				// Wenn es den Benutzer noch nicht gibt, muss er sich erst registrieren, hier
+				// werden die entsprechenden Meldungen ausgegeben.
 				MailDBManager.fuehreSqlAus(
 						String.format("SELECT COUNT(*) FROM benutzer WHERE email = '%s' AND passwort = '%s'",
-								emailField.getText(), passwordField.getText()),
+								emailTextField.getText(), passwordField.getText()),
 						daten -> {
 							try {
 								if (daten != null && daten.next() && daten.getInt(1) != 0) {
 									loginFenster.setVisible(false);
-									new MiniMailStart("MiniMail", emailField.getText(), passwordField.getText());
+									new MiniMailStart("MiniMail", emailTextField.getText(), passwordField.getText());
 
 								} else {
 
@@ -156,7 +166,7 @@ public class Benutzer {
 		loginLabel.setFont(new Font("Arial", 30, 30));
 		loginFenster.add(emailLabel);
 		emailLabel.setForeground(Color.WHITE);
-		loginFenster.add(emailField, "width :300:, wrap");
+		loginFenster.add(emailTextField, "width :300:, wrap");
 		loginFenster.add(passwordLabel);
 		passwordLabel.setForeground(Color.WHITE);
 		loginFenster.add(passwordField, "width :300:, wrap");
@@ -188,9 +198,10 @@ public class Benutzer {
 	private FocusListener getPruefeTextFieldListener() {
 
 		return new FocusAdapter() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void focusLost(FocusEvent event) {
-				if (emailField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+				if (emailTextField.getText().isEmpty() || passwordField.getText().isEmpty()) {
 					loginButton.setEnabled(false);
 
 				} else {

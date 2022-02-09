@@ -82,7 +82,6 @@ public class Senden extends JFrame {
 				beantworten();
 			}
 		}
-
 	}
 
 	// der Konstruktor
@@ -97,20 +96,22 @@ public class Senden extends JFrame {
 		// wir nehmen ein Border-Layout
 		setLayout(new BorderLayout());
 
-		// die Aktionen erstellen
+		// die Aktionen für Neue E-Mail erstellen
 		sendenAct = new MeineAktionen("Neue E-Mail", new ImageIcon("icons/mail-generic.gif"),
 				"Erstellt eine neue E-Mail", null, "senden");
 
-		// die Aktionen erstellen
+		// die Aktionen für E-Mail weiterleiten erstellen
 		weiterleitenAct = new MeineAktionen("Email Weiterleiten", new ImageIcon("icons/mail-forward.gif"),
 				"Leitet eine Email weiter", null, "weiterleiten");
 
+		// die Aktionen für E-Mail beantwoten erstellen
 		beantwortenAct = new MeineAktionen("Email Beantworten", new ImageIcon("icons/mail-reply.gif"),
 				"Email beantworten", null, "beantworten");
 
 		// die Symbolleiste oben einfügen
 		add(symbolleiste(), BorderLayout.NORTH);
 
+		// Größe setzten und anzeigen
 		setVisible(true);
 		setSize(700, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -185,7 +186,6 @@ public class Senden extends JFrame {
 					// und anzeigen
 					// übergeben wird der Frame der äußeren Klasse
 					new Anzeige(Senden.this, true, ID, empfaenger, betreff, inhalt);
-
 				}
 			}
 		});
@@ -244,7 +244,11 @@ public class Senden extends JFrame {
 		tabelleAktualisieren();
 	}
 
+	// zum Weiterleiten
 	private void weiterleiten() {
+
+		// Überprüfen welche Zeile selektiert wurde, davon wird dann die Nachricht der
+		// Betreff von der alten Nachricht in die neuen Felder übernommen
 		int zeile = tabelle.getSelectedRow();
 		if (zeile == -1) {
 			JOptionPane.showMessageDialog(this, "Bitte eine Nachricht auswählen.");
@@ -254,7 +258,12 @@ public class Senden extends JFrame {
 		}
 	}
 
+	// zum Beantworten
 	private void beantworten() {
+
+		// Überprüfen welche Zeile selektiert wurde, davon wird dann die Nachricht der
+		// Betreff und die Absender Adresse von der alten Nachricht in die neuen Felder
+		// übernommen
 		int zeile = tabelle.getSelectedRow();
 		if (zeile == -1) {
 			JOptionPane.showMessageDialog(this, "Bitte eine Nachricht auswählen.");

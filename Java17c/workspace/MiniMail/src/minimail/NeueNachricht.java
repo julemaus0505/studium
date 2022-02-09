@@ -32,16 +32,16 @@ public class NeueNachricht extends JDialog {
 	private static final long serialVersionUID = -5496318621928815910L;
 
 	// für die Eingabefelder
-	private JTextField empfaenger;
-	private JTextField betreff;
-	private JTextArea inhalt;
+	private JTextField empfaengerTextField;
+	private JTextField betreffTextField;
+	private JTextArea inhaltTextArea;
 
 	private String absenderEmail;
 	private String password;
 
 	// für die Schaltflächen
-	private JButton ok;
-	private JButton abbrechen;
+	private JButton okButton;
+	private JButton abbrechenButton;
 
 	// die innere Klasse für den ActionListener
 	class NeuListener implements ActionListener {
@@ -71,10 +71,10 @@ public class NeueNachricht extends JDialog {
 		this.absenderEmail = absenderEmail;
 
 		setTitle("E-Mail beantworten");
-		ok.setText("Beantworten");
-		this.betreff.setText("AW:" + betreff);
-		this.inhalt.setText("\n\n----- Text der ursprünglichen Nachricht -----\n\n" + inhalt);
-		this.empfaenger.setText(empfaenger);
+		okButton.setText("Beantworten");
+		this.betreffTextField.setText("AW:" + betreff);
+		this.inhaltTextArea.setText("\n\n----- Text der ursprünglichen Nachricht -----\n\n" + inhalt);
+		this.empfaengerTextField.setText(empfaenger);
 
 	}
 
@@ -84,9 +84,9 @@ public class NeueNachricht extends JDialog {
 		this(parent, modal, absenderEmail, password);
 
 		setTitle("E-Mail weiterleiten");
-		ok.setText("Weiterleiten");
-		this.betreff.setText("WG:" + betreff);
-		this.inhalt.setText("\n\n----- Text der ursprünglichen Nachricht -----\n\n" + inhalt);
+		okButton.setText("Weiterleiten");
+		this.betreffTextField.setText("WG:" + betreff);
+		this.inhaltTextArea.setText("\n\n----- Text der ursprünglichen Nachricht -----\n\n" + inhalt);
 
 	}
 
@@ -106,45 +106,46 @@ public class NeueNachricht extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
 
+	// die Oberfläche
 	private void initGui() {
 		setLayout(new BorderLayout());
 		JPanel oben = new JPanel();
 		oben.setLayout(new GridLayout(0, 2));
 		oben.add(new JLabel("Empfänger:"));
-		empfaenger = new JTextField();
-		oben.add(empfaenger);
+		empfaengerTextField = new JTextField();
+		oben.add(empfaengerTextField);
 		oben.add(new JLabel("Betreff:"));
-		betreff = new JTextField();
-		oben.add(betreff);
+		betreffTextField = new JTextField();
+		oben.add(betreffTextField);
 		add(oben, BorderLayout.NORTH);
-		inhalt = new JTextArea();
+		inhaltTextArea = new JTextArea();
 
 		// den Zeilenumbruch aktivieren
-		inhalt.setLineWrap(true);
-		inhalt.setWrapStyleWord(true);
+		inhaltTextArea.setLineWrap(true);
+		inhaltTextArea.setWrapStyleWord(true);
 
 		// das Feld setzen wir in ein Scrollpane
-		JScrollPane scroll = new JScrollPane(inhalt);
+		JScrollPane scroll = new JScrollPane(inhaltTextArea);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		add(scroll);
 
 		JPanel unten = new JPanel();
 
 		// die Schaltflächen
-		ok = new JButton("Senden");
-		ok.setActionCommand("senden");
-		abbrechen = new JButton("Abbrechen");
-		abbrechen.setActionCommand("abbrechen");
+		okButton = new JButton("Senden");
+		okButton.setActionCommand("senden");
+		abbrechenButton = new JButton("Abbrechen");
+		abbrechenButton.setActionCommand("abbrechen");
 
 		NeuListener listener = new NeuListener();
-		ok.addActionListener(listener);
-		abbrechen.addActionListener(listener);
+		okButton.addActionListener(listener);
+		abbrechenButton.addActionListener(listener);
 
-		unten.add(ok);
-		unten.add(abbrechen);
+		unten.add(okButton);
+		unten.add(abbrechenButton);
 		add(unten, BorderLayout.SOUTH);
 
-		// anzeigen
+		// Größe setzten
 		setSize(600, 300);
 
 	}
@@ -205,13 +206,13 @@ public class NeueNachricht extends JDialog {
 			nachricht.setFrom(new InternetAddress(absender));
 
 			// den Empfänger
-			nachricht.setRecipients(Message.RecipientType.TO, InternetAddress.parse(empfaenger.getText()));
+			nachricht.setRecipients(Message.RecipientType.TO, InternetAddress.parse(empfaengerTextField.getText()));
 
 			// den Betreff
-			nachricht.setSubject(betreff.getText());
+			nachricht.setSubject(betreffTextField.getText());
 
 			// und den Text
-			nachricht.setText(inhalt.getText());
+			nachricht.setText(inhaltTextArea.getText());
 
 			// die Nachricht verschicken
 			Transport.send(nachricht);
@@ -239,9 +240,9 @@ public class NeueNachricht extends JDialog {
 			PreparedStatement prepState;
 			prepState = verbindung
 					.prepareStatement("insert into gesendet (empfaenger, betreff, inhalt) values (?,?,?)");
-			prepState.setString(1, empfaenger.getText());
-			prepState.setString(2, betreff.getText());
-			prepState.setString(3, inhalt.getText());
+			prepState.setString(1, empfaengerTextField.getText());
+			prepState.setString(2, betreffTextField.getText());
+			prepState.setString(3, inhaltTextArea.getText());
 
 			// das Statement ausführen
 			prepState.executeUpdate();

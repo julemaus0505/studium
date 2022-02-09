@@ -70,10 +70,10 @@ public class MiniMailStart extends JFrame {
 		setLayout(new MigLayout("w 350, h 250", "[center, 50%][center, 50%]"));
 
 		// Label für die Schaltflächen
-		JLabel programm = new JLabel("E-Mail Programm");
-		programm.setFont(new Font("Arial", 30, 30));
+		JLabel programmLabel = new JLabel("E-Mail Programm");
+		programmLabel.setFont(new Font("Arial", 30, 30));
 
-		// die Schaltflächen
+		// die Schaltflächen und Labels
 		JLabel sendenLabel = new JLabel("Senden");
 		JButton sendenButton = new JButton("Senden");
 		sendenButton.setActionCommand("senden");
@@ -86,17 +86,17 @@ public class MiniMailStart extends JFrame {
 		JLabel benutzerLoeschenLabel = new JLabel("Benutzer Löschen");
 		JButton benutzerLoeschenButton = new JButton("Benutzer Löschen");
 		benutzerLoeschenButton.setActionCommand("benutzerLoeschen");
-		JButton beenden = new JButton("Beenden");
-		beenden.setActionCommand("ende");
+		JButton beendenButton = new JButton("Beenden");
+		beendenButton.setActionCommand("ende");
 
 		MeinListener listener = new MeinListener();
 		sendenButton.addActionListener(listener);
 		empfangenButton.addActionListener(listener);
 		emailsLoeschenButton.addActionListener(listener);
 		benutzerLoeschenButton.addActionListener(listener);
-		beenden.addActionListener(listener);
+		beendenButton.addActionListener(listener);
 
-		add(programm, "spanx, center,wrap 30");
+		add(programmLabel, "spanx, center,wrap 30");
 		add(sendenLabel);
 		add(empfangenLabel, "wrap ");
 		add(sendenButton, "growx");
@@ -105,7 +105,7 @@ public class MiniMailStart extends JFrame {
 		add(benutzerLoeschenLabel, "wrap ");
 		add(emailsLoeschenButton, "growx");
 		add(benutzerLoeschenButton, "growx,wrap ");
-		add(beenden, "growx,spanx");
+		add(beendenButton, "growx,spanx");
 
 		// Größe setzen, Standardverhalten festlegen und anzeigen
 		pack();
@@ -123,13 +123,16 @@ public class MiniMailStart extends JFrame {
 		new Empfangen(email, password);
 	}
 
+	// Bei Methode hier wird erst abgefragt, ob sie die Benutzer löschen wollen,
+	// wenn ja, dann werden die Benutzer gelöscht
 	private void loescheBenutzer() {
-
 		if (JOptionPane.showConfirmDialog(this, "Möchten Sie die Benutzer löschen") == JOptionPane.YES_OPTION) {
 			MailDBManager.fuehreSqlUpdateAus("DELETE FROM benutzer");
 		}
 	}
 
+	// Bei Methode hier wird erst abgefragt, ob sie die Empfangenen und gesendeten
+	// E-Mails löschen wollen, wenn ja, dann werden die E-Mails gelöscht
 	private void loescheEmail() {
 		if (JOptionPane.showConfirmDialog(this,
 				"Möchten Sie die Empfangenen und gesendeten E-Mails löschen") == JOptionPane.YES_OPTION) {
@@ -138,6 +141,7 @@ public class MiniMailStart extends JFrame {
 		}
 	}
 
+	// Programm beenden
 	private void beenden() {
 		System.exit(0);
 	}

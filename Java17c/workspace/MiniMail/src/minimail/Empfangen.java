@@ -56,8 +56,6 @@ public class Empfangen extends JFrame {
 	// der Konstruktor
 	Empfangen(String email, String password) {
 		super();
-
-		// Neu
 		this.email = email;
 		this.password = password;
 
@@ -280,6 +278,7 @@ public class Empfangen extends JFrame {
 					if (part.getContent() instanceof String) {
 
 						String inhalt = part.getContent().toString();
+						
 						// und die Nachricht speichern
 						nachrichtSpeichern(sender, betreff, inhalt);
 

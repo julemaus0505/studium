@@ -19,7 +19,15 @@ import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
 
-// Neu Klasse erstellt
+/**
+ * Neue Klasse für die Registrierung erstellt 
+ * 
+ * @author Julia Petersen
+ * 
+ * Diese Klasse stellt das Registrierungsfenter da, so das sich der Benutzer in der Datenbank registrieren kann.
+ * Wenn der Benutzer sich erfolgreich registrieren konnte wird das Programm geöffnet. 
+ *
+ */
 public class Registrieren {
 
 	// Klassenvariablen
@@ -27,18 +35,18 @@ public class Registrieren {
 	private JTextField emailTextField;
 	private JPasswordField passwordField;
 	private JPasswordField passwortWiederholenPasswordField;
-	private JFrame registrierenFester;
+	private JFrame registrierenFenster;
 
 	// Mehtode kümmert sich um das Fenster Registrieren
 	public void zeigeRegistrierenFenster(JFrame loginFenster) {
-		registrierenFester = new JFrame("Registrieren");
-		registrierenFester.setLayout(new MigLayout("w 300, h 300"));
-		registrierenFester.setResizable(false);
+		registrierenFenster = new JFrame("Registrieren");
+		registrierenFenster.setLayout(new MigLayout("w 300, h 300"));
+		registrierenFenster.setResizable(false);
 
 		// für die Anzeige wo das Fenster angezeigt wird
-		final Dimension d = registrierenFester.getToolkit().getScreenSize();
-		registrierenFester.setLocation((int) ((d.getWidth() - registrierenFester.getWidth()) / 5),
-				(int) ((d.getHeight() - registrierenFester.getHeight()) / 5));
+		final Dimension d = registrierenFenster.getToolkit().getScreenSize();
+		registrierenFenster.setLocation((int) ((d.getWidth() - registrierenFenster.getWidth()) / 5),
+				(int) ((d.getHeight() - registrierenFenster.getHeight()) / 5));
 
 		// JLabel erstellt
 		JLabel registrierenLabel = new JLabel("JETZT REGISTRIEREN");
@@ -55,7 +63,7 @@ public class Registrieren {
 		emailLabel.setForeground(Color.WHITE);
 		passwortWiederholenLabel.setForeground(Color.WHITE);
 
-		// Layout den Textfeild hinzugefügt und den Focus gesetzt
+		// Layout dem TextField hinzugefügt und den Focus über den FocusListenner gesetzt
 		emailTextField = new JTextField("", 30);
 		emailTextField.addFocusListener(getPruefeTextFieldListener());
 		passwordField = new JPasswordField("", 30);
@@ -74,7 +82,7 @@ public class Registrieren {
 
 		// Label und Fenster farbe genetzt
 		registrierenLabel.setForeground(Color.WHITE);
-		registrierenFester.getContentPane().setBackground(Color.DARK_GRAY);
+		registrierenFenster.getContentPane().setBackground(Color.DARK_GRAY);
 
 		registrierenButton.addActionListener(new ActionListener() {
 
@@ -99,25 +107,25 @@ public class Registrieren {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				loginFenster.setVisible(true);
-				registrierenFester.setVisible(false);
+				registrierenFenster.setVisible(false);
 
 			}
 		});
 
-		// Neu Dem Fenster die Node hinzufügen
-		registrierenFester.add(registrierenLabel, "spanx, center,wrap 10");
+		// Neu dem RegistrierenFenster die Node hinzufügen
+		registrierenFenster.add(registrierenLabel, "spanx, center,wrap 10");
 		registrierenLabel.setFont(new Font("Arial", 20, 20));
-		registrierenFester.add(emailLabel, "spanx,wrap 10");
-		registrierenFester.add(emailTextField, "width :250:, wrap");
-		registrierenFester.add(passwortLabel, "spanx,wrap 10");
-		registrierenFester.add(passwordField, "width :250:, wrap");
-		registrierenFester.add(passwortWiederholenLabel, "spanx,wrap 10");
-		registrierenFester.add(passwortWiederholenPasswordField, "width :250:, wrap");
-		registrierenFester.add(registrierenButton, "split 2");
-		registrierenFester.add(abbrechenButton, "growx");
-		registrierenFester.pack();
-		registrierenFester.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		registrierenFester.setVisible(true);
+		registrierenFenster.add(emailLabel, "spanx,wrap 10");
+		registrierenFenster.add(emailTextField, "width :250:, wrap");
+		registrierenFenster.add(passwortLabel, "spanx,wrap 10");
+		registrierenFenster.add(passwordField, "width :250:, wrap");
+		registrierenFenster.add(passwortWiederholenLabel, "spanx,wrap 10");
+		registrierenFenster.add(passwortWiederholenPasswordField, "width :250:, wrap");
+		registrierenFenster.add(registrierenButton, "split 2");
+		registrierenFenster.add(abbrechenButton, "growx");
+		registrierenFenster.pack();
+		registrierenFenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		registrierenFenster.setVisible(true);
 
 	}
 
@@ -162,23 +170,23 @@ public class Registrieren {
 
 				});
 
+		// Prüfung ob benutzer mit der E-Mail Adresse schon registriert ist gbit es die Meldung
 		if (emailAdresseVorhanden == 1) {
-			JOptionPane.showMessageDialog(registrierenFester, "Die E-Mailadresse ist bereits registriet.");
+			JOptionPane.showMessageDialog(registrierenFenster, "Die E-Mailadresse ist bereits registriet.");
 
+		// Prüfung ob in der E-Mail Adresse eine @ und die anderen zeichen vorhenden sind
 		} else if (!emailAdresse.matches("^[(a-zA-Z-0-9-\\_\\+\\.)]+@[(a-z-A-z)]+\\.[(a-zA-z)]{2,3}$")
 				|| !passwordField.getText().equals(passwortWiederholenPasswordField.getText())) {
 
-			JOptionPane.showMessageDialog(registrierenFester,
+			JOptionPane.showMessageDialog(registrierenFenster,
 					"Die Email Adresse ist ungültig, oder Passwörter simmen nicht über ein.");
 
 		} else {
-
-			JOptionPane.showMessageDialog(registrierenFester, "Willkommen die Registrierung hat geklappt.");
-
+			JOptionPane.showMessageDialog(registrierenFenster, "Willkommen die Registrierung hat geklappt.");
+			new MiniMailStart("MiniMail", emailAdresse, emailAdresse);
+			registrierenFenster.setVisible(false);
 			return true;
 		}
-
 		return false;
 	}
-	
 }
