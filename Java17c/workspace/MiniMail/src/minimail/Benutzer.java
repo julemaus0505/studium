@@ -22,10 +22,10 @@ import net.miginfocom.swing.MigLayout;
 /**
  * Teilaufgabe 1
  *
- * Die Klasse stellt die Loginfunktion bereit.
- * Die Benutzereingeben werden mit den Einträgen in der Datenbank überprüft.
+ * Die Klasse stellt die Loginfunktion bereit. Die Benutzereingeben werden mit
+ * den Einträgen in der Datenbank überprüft.
  *
- * @author Julia Petersen  
+ * @author Julia Petersen
  */
 
 public class Benutzer {
@@ -66,8 +66,6 @@ public class Benutzer {
 		registrierenButton = new JButton("Registrieren");
 		abbrechenButton = new JButton("Abbrechen");
 
-		JButton loginDatenEintragen = new JButton("Daten eingeben");
-
 		// ToolTips erstellt
 		emailTextField.setToolTipText("Bitte die E-mail eingeben");
 		passwordField.setToolTipText("Bitte Passwort eingeben");
@@ -87,19 +85,6 @@ public class Benutzer {
 
 			}
 
-		});
-
-		// DAS MUSS VOR DEM ABSCHICKEN GELÖSCHT WERDEN
-		loginDatenEintragen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				emailTextField.setText("petersenjulia60@gmail.com");
-				passwordField.setText("petersen2022");
-				loginButton.setEnabled(true);
-				registrierenButton.setEnabled(true);
-
-			}
 		});
 
 		// wenn der Loginbutton geklickt wurde, wird überprüft, ob es den Benutzer
@@ -154,7 +139,7 @@ public class Benutzer {
 		loginFenster.add(registrierenButton, " skip 1, spanx, split 3");
 		loginFenster.add(loginButton);
 		loginFenster.add(abbrechenButton, "growx 10");
-		loginFenster.add(loginDatenEintragen);
+		
 
 		// Fenster Größe setzen
 		loginFenster.setSize(600, 600);
@@ -175,8 +160,10 @@ public class Benutzer {
 	}
 
 	/**
-	 * Die Methode erstellt einen {@link FocusListener} um Textfelder auf leer zu prüfen <br>
+	 * Die Methode erstellt einen {@link FocusListener} um Textfelder auf leer zu
+	 * prüfen <br>
 	 * und steuert entsprechend den Login Button
+	 * 
 	 * @return erstellter {@link FocusListener}
 	 */
 	private FocusListener getPruefeTextFieldListener() {

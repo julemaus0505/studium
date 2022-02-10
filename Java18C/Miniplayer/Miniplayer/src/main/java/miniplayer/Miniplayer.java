@@ -23,7 +23,7 @@ public class Miniplayer extends Application {
 
 		// die Datei, die abgespielt werden soll
 		// den Pfad müssen Sie anpassen
-		File datei = new File("C:Michael Patrick Kelly - Blurry Eyes (Official Video).mp3");
+		File datei = new File("C:\\Users\\julia\\Desktop\\Michael_Patrick_Kelly.mp4");
 
 		// das Medium, den Mediaplayer und die MediaView erzeugen
 		Media medium = new Media(datei.toURI().toString());
@@ -37,7 +37,7 @@ public class Miniplayer extends Application {
 		Button start = new Button("Wiedergabe");
 		start.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent e) {
+			public void handle(ActionEvent event) {
 				mediaplayer.play();
 			}
 		});
@@ -45,7 +45,7 @@ public class Miniplayer extends Application {
 		Button stop = new Button("Anhalten");
 		stop.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent e) {
+			public void handle(ActionEvent event) {
 				mediaplayer.stop();
 			}
 		});
@@ -53,7 +53,7 @@ public class Miniplayer extends Application {
 		Button pause = new Button("Pause");
 		pause.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent e) {
+			public void handle(ActionEvent event) {
 				mediaplayer.pause();
 			}
 		});
@@ -69,7 +69,7 @@ public class Miniplayer extends Application {
 		// die Szene erzeugen
 		// an den Konstruktor werden der oberste Knoten und
 		// die Größe übergeben
-		Scene meineScene = new Scene(rootNode, 660, 550);
+		Scene meineScene = new Scene(rootNode, 1350, 850);
 
 		// den Titel über stage setzen
 		meineStage.setTitle("Ein einfacher Multimedia-Player");

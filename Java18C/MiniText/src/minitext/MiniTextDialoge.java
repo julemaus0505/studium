@@ -1,4 +1,4 @@
-package de.fernschulen.minitext;
+package minitext;
 
 import java.io.File;
 

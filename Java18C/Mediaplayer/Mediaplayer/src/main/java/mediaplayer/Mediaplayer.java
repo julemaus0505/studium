@@ -30,7 +30,7 @@ public class Mediaplayer extends Application {
 		//im Vollbild darstellen
 		meineStage.setMaximized(true);
 		//das Icon setzen
-		File bilddatei = new File("icons/icon.gif");
+		File bilddatei = new File("mediaplayer.icons/icon.gif");
 		Image bild = new Image(bilddatei.toURI().toString());
 		meineStage.getIcons().add(bild);
 		//und anzeigen

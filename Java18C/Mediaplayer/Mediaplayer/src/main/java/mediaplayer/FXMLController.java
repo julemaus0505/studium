@@ -60,6 +60,8 @@ public class FXMLController {
 			// dann über eine eigene Methode laden
 			dateiLaden(datei);
 	}
+	
+	
 
 	// die Methode zum Stoppen
 	@FXML
