@@ -4,35 +4,43 @@ import java.io.File;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
-
 public class FXMLController {
+
 	// für die Bühne
 	private Stage meineStage;
+
 	// für den Player
 	private MediaPlayer mediaplayer;
 
 	// für die MediaView
 	@FXML
 	private MediaView mediaview;
+
 	// für die ImageView mit dem Symbol
 	@FXML
 	private ImageView symbol;
+
 	// für das Listenfeld
 	@FXML
 	private ListView<String> liste;
+
+	private String dateiname;
 
 	// die Methode setzt die Bühne auf den übergebenen Wert
 	public void setMeineStage(Stage meineStage) {
@@ -42,10 +50,13 @@ public class FXMLController {
 	// die Methode zum Laden
 	@FXML
 	protected void ladenKlick(ActionEvent event) {
+
 		// eine neue Instanz der Klasse FileChooser erzeugen
 		FileChooser oeffnenDialog = new FileChooser();
+
 		// den Titel für den Dialog setzen
 		oeffnenDialog.setTitle("Datei öffnen");
+
 		// die Filter setzen
 		oeffnenDialog.getExtensionFilters().add(new ExtensionFilter("Audiodateien", "*.mp3"));
 		oeffnenDialog.getExtensionFilters().add(new ExtensionFilter("Videodateien", "*.mp4"));
@@ -55,19 +66,39 @@ public class FXMLController {
 
 		// den Öffnendialog anzeigen und das Ergebnis beschaffen
 		File datei = oeffnenDialog.showOpenDialog(meineStage);
+
 		// wurde eine Datei ausgewählt
-		if (datei != null)
+		if (datei != null) {
+
 			// dann über eine eigene Methode laden
 			dateiLaden(datei);
+		}
+		// Tailaufgabe 2
+		// symbole ausschallten
+
+		// Teileaufgabe 1
+		// wenn liste nicht null ist dann beim drauf klicken neu Laden
+		liste.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+
+				if (liste.getSelectionModel().getSelectedItem() != null) {
+					titelNeuLaden(datei);
+
+				}
+
+			}
+		});
 	}
-	
-	
 
 	// die Methode zum Stoppen
 	@FXML
 	protected void stoppKlick(ActionEvent event) {
+
 		// gibt es überhaupt einen Mediaplayer?
 		if (mediaplayer != null)
+
 			// dann anhalten
 			mediaplayer.stop();
 	}
@@ -75,8 +106,10 @@ public class FXMLController {
 	// die Methode für die Pause
 	@FXML
 	protected void pauseKlick(ActionEvent event) {
+
 		// gibt es überhaupt einen Mediaplayer?
 		if (mediaplayer != null)
+
 			// dann unterbrechen
 			mediaplayer.pause();
 	}
@@ -84,8 +117,10 @@ public class FXMLController {
 	// die Methode für die Wiedergabe
 	@FXML
 	protected void playKlick(ActionEvent event) {
+
 		// gibt es überhaupt einen Mediaplayer?
 		if (mediaplayer != null)
+
 			// dann wiedergeben
 			mediaplayer.play();
 	}
@@ -93,25 +128,29 @@ public class FXMLController {
 	// die Methode für das Ein- und Ausschalten der Lautstärke
 	@FXML
 	protected void lautsprecherKlick(ActionEvent event) {
+
 		// gibt es überhaupt einen Mediaplayer?
 		String dateiname;
 		if (mediaplayer != null) {
+
 			// ist die Lautstärke 0?
 			if (mediaplayer.getVolume() == 0) {
+
 				// dann auf 100 setzen
 				mediaplayer.setVolume(100);
+
 				// und das "normale" Symbol setzen
 				dateiname = "icons/mute.gif";
 			} else {
+
 				// sonst auf 0 setzen
 				mediaplayer.setVolume(0);
+
 				// und das durchgestrichene Symbol setzen
 				dateiname = "icons/mute_off.gif";
 			}
-			// das Bild erzeugen und anzeigen
-			File bilddatei = new File(dateiname);
-			Image bild = new Image(bilddatei.toURI().toString());
-			symbol.setImage(bild);
+
+			zeigeIcon(dateiname);
 		}
 	}
 
@@ -123,32 +162,55 @@ public class FXMLController {
 
 	// die Methode lädt eine Datei
 	public void dateiLaden(File datei) {
+
+		titelNeuLaden(datei);
+
+		// den Pfad in das Listenfeld eintragen
+		liste.getItems().add(datei.toString());
+
+	}
+
+	// die Methode lädt eine Datei
+	public void titelNeuLaden(File datei) {
+
 		// läuft schon eine Wiedergabe?
 		if (mediaplayer != null && mediaplayer.getStatus() == MediaPlayer.Status.PLAYING) {
+
 			// dann anhalten
 			mediaplayer.stop();
 		}
+
 		// das Medium, den Mediaplayer und die MediaView erzeugen
 		try {
 			Media medium = new Media(datei.toURI().toString());
 			mediaplayer = new MediaPlayer(medium);
 			mediaview.setMediaPlayer(mediaplayer);
+
 			// die Wiedergabe starten
 			mediaplayer.play();
 
-			// den Pfad in das Listenfeld eintragen
-			liste.getItems().add(datei.toString());
 			// und die Titelleiste anpassen
 			meineStage.setTitle("JavaFX Multimedia-Player " + datei.toString());
-		} catch (Exception ex) {
+
+		} catch (Exception exception) {
+
 			// den Dialog erzeugen und anzeigen
 			Alert meinDialog = new Alert(AlertType.INFORMATION,
-					"Beim Laden hat es ein Problem gegeben.\n" + ex.getMessage());
+					"Beim Laden hat es ein Problem gegeben.\n" + exception.getMessage());
+
 			// den Text setzen
 			meinDialog.setHeaderText("Bitte beachten");
 			meinDialog.initOwner(meineStage);
+
 			// den Dialog anzeigen
 			meinDialog.showAndWait();
 		}
+	}
+
+	public void zeigeIcon(String dateiname) {
+
+		File bilddatei = new File(dateiname);
+		Image bild = new Image(bilddatei.toURI().toString());
+		symbol.setImage(bild);
 	}
 }

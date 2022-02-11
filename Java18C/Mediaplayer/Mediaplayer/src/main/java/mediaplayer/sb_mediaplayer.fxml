@@ -37,7 +37,7 @@
         </Menu>
       </menus>
     </MenuBar>
-      <ToolBar prefHeight="40.0" prefWidth="200.0">
+      <ToolBar fx:id="symbolLeiste" prefHeight="40.0" prefWidth="200.0">
         <items>
           <Button mnemonicParsing="false" onAction="#ladenKlick">
                <graphic>
@@ -76,7 +76,7 @@
             </Button>
             <Button layoutX="142.0" layoutY="10.0" mnemonicParsing="false" onAction="#lautsprecherKlick">
                <graphic>
-                  <ImageView fx:id="symbol" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="symbolLaut" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icons/mute.gif" />
                      </image>
