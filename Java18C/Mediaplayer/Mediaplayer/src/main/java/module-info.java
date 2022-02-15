@@ -1,8 +1,10 @@
 module mediaplayer {
-    requires javafx.controls;
+	exports mediaplayer;
+    
+	requires javafx.controls;
     requires javafx.fxml;
 	requires javafx.media;
+	requires javafx.graphics;
 
-    opens mediaplayer to javafx.fxml;
-    exports mediaplayer;
+    opens mediaplayer to javafx.fxml, javafx.graphics;
 }

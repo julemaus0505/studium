@@ -8,8 +8,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -32,9 +33,26 @@ public class FXMLController {
 	@FXML
 	private MediaView mediaview;
 
-	// für die ImageView mit dem Symbol
+	// für die ImageView für Datei
 	@FXML
-	private ImageView symbol;
+	private ImageView symbolDateiAuswaehlen;
+
+	// für die ImageView für Play
+	@FXML
+	private ImageView symbolPlay;
+
+	// für die ImageView für Pause
+	@FXML
+	private ImageView symbolPause;
+
+	@FXML
+	private Button buttonDateiAuswaehlen;
+
+	@FXML
+	private Button buttonPlay;
+
+	// @FXML
+	// private Button buttonPause;
 
 	// für das Listenfeld
 	@FXML
@@ -45,6 +63,7 @@ public class FXMLController {
 	// die Methode setzt die Bühne auf den übergebenen Wert
 	public void setMeineStage(Stage meineStage) {
 		this.meineStage = meineStage;
+
 	}
 
 	// die Methode zum Laden
@@ -72,9 +91,32 @@ public class FXMLController {
 
 			// dann über eine eigene Methode laden
 			dateiLaden(datei);
+
+			// Teilaufgabe 2
+			// die Grafik von Play auf Pause setzten
+			buttonPlay.setGraphic(symbolPause);
+
 		}
+
 		// Tailaufgabe 2
 		// symbole ausschallten
+
+		buttonPlay.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+
+				mediaplayer.pause();
+
+				if (buttonPlay.getGraphic() != symbolPlay && datei != null) {
+					mediaplayer.pause();
+					buttonPlay.setGraphic(symbolPlay);
+				} else {
+					mediaplayer.play();
+					buttonPlay.setGraphic(symbolPause);
+				}
+			}
+		});
 
 		// Teileaufgabe 1
 		// wenn liste nicht null ist dann beim drauf klicken neu Laden
@@ -87,20 +129,8 @@ public class FXMLController {
 					titelNeuLaden(datei);
 
 				}
-
 			}
 		});
-	}
-
-	// die Methode zum Stoppen
-	@FXML
-	protected void stoppKlick(ActionEvent event) {
-
-		// gibt es überhaupt einen Mediaplayer?
-		if (mediaplayer != null)
-
-			// dann anhalten
-			mediaplayer.stop();
 	}
 
 	// die Methode für die Pause
@@ -123,35 +153,6 @@ public class FXMLController {
 
 			// dann wiedergeben
 			mediaplayer.play();
-	}
-
-	// die Methode für das Ein- und Ausschalten der Lautstärke
-	@FXML
-	protected void lautsprecherKlick(ActionEvent event) {
-
-		// gibt es überhaupt einen Mediaplayer?
-		String dateiname;
-		if (mediaplayer != null) {
-
-			// ist die Lautstärke 0?
-			if (mediaplayer.getVolume() == 0) {
-
-				// dann auf 100 setzen
-				mediaplayer.setVolume(100);
-
-				// und das "normale" Symbol setzen
-				dateiname = "icons/mute.gif";
-			} else {
-
-				// sonst auf 0 setzen
-				mediaplayer.setVolume(0);
-
-				// und das durchgestrichene Symbol setzen
-				dateiname = "icons/mute_off.gif";
-			}
-
-			zeigeIcon(dateiname);
-		}
 	}
 
 	// die Methode zum Beenden
@@ -205,12 +206,5 @@ public class FXMLController {
 			// den Dialog anzeigen
 			meinDialog.showAndWait();
 		}
-	}
-
-	public void zeigeIcon(String dateiname) {
-
-		File bilddatei = new File(dateiname);
-		Image bild = new Image(bilddatei.toURI().toString());
-		symbol.setImage(bild);
 	}
 }
