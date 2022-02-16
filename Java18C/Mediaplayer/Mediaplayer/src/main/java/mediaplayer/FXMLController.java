@@ -10,8 +10,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
@@ -58,12 +56,16 @@ public class FXMLController {
 	@FXML
 	private ListView<String> liste;
 
+	@FXML
 	private String dateiname;
 
 	// die Methode setzt die Bühne auf den übergebenen Wert
 	public void setMeineStage(Stage meineStage) {
 		this.meineStage = meineStage;
 
+		// Teilaufgabe 3
+		//
+		buttonPlay.setDisable(true);
 	}
 
 	// die Methode zum Laden
@@ -86,8 +88,9 @@ public class FXMLController {
 		// den Öffnendialog anzeigen und das Ergebnis beschaffen
 		File datei = oeffnenDialog.showOpenDialog(meineStage);
 
+		//Teilaufgabe 1
 		// wurde eine Datei ausgewählt
-		if (datei != null) {
+		if (datei != null && liste.getItems().contains(datei.toString())) {
 
 			// dann über eine eigene Methode laden
 			dateiLaden(datei);
@@ -96,11 +99,21 @@ public class FXMLController {
 			// die Grafik von Play auf Pause setzten
 			buttonPlay.setGraphic(symbolPause);
 
+		} else if (datei != null) {
+
+			// dann über eine eigene Methode laden
+			dateiLaden(datei);
+
+			// den Pfad in das Listenfeld setzen
+			liste.getItems().add(datei.toString());
+
+			// Teilaufgabe 2
+			// die Grafik von Play auf Pause setzten
+			buttonPlay.setGraphic(symbolPause);
 		}
 
 		// Tailaufgabe 2
-		// symbole ausschallten
-
+		// symbole ändern
 		buttonPlay.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -126,7 +139,8 @@ public class FXMLController {
 			public void handle(MouseEvent event) {
 
 				if (liste.getSelectionModel().getSelectedItem() != null) {
-					titelNeuLaden(datei);
+
+					dateiLaden(new File(liste.getSelectionModel().getSelectedItem()));
 
 				}
 			}
@@ -164,15 +178,8 @@ public class FXMLController {
 	// die Methode lädt eine Datei
 	public void dateiLaden(File datei) {
 
-		titelNeuLaden(datei);
-
-		// den Pfad in das Listenfeld eintragen
-		liste.getItems().add(datei.toString());
-
-	}
-
-	// die Methode lädt eine Datei
-	public void titelNeuLaden(File datei) {
+		// Teilaufgabe 3
+		buttonPlay.setDisable(false);
 
 		// läuft schon eine Wiedergabe?
 		if (mediaplayer != null && mediaplayer.getStatus() == MediaPlayer.Status.PLAYING) {

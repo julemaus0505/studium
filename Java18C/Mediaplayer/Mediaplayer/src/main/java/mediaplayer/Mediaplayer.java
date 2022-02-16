@@ -35,8 +35,9 @@ public class Mediaplayer extends Application {
 		// die Szene setzen
 		meineStage.setScene(meineScene);
 
+		// Wieder auf true stellen
 		// im Vollbild darstellen
-		meineStage.setMaximized(true);
+		meineStage.setMaximized(false);
 
 		// das Icon setzen
 		File bilddatei = new File("mediaplayer.icons/icon.gif");
