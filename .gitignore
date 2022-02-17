@@ -34,6 +34,8 @@ hs_err_pid*
 .settings/
 bin/
 .metadata/
+target/
 
+**/target/**
 **/bin/**
 **/db-derby-*/**
