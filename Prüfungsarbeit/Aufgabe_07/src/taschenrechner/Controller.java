@@ -1,7 +1,5 @@
 package taschenrechner;
 
-import java.util.StringTokenizer;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -67,68 +65,68 @@ public class Controller {
 	@FXML
 	void addition(ActionEvent event) {
 
+		tauscheOperant('+');
+
 		operator = '+';
-		
-		fuegeZahlOderOperandHinzu("+");
 
 	}
 
 	@FXML
 	void subtraktion(ActionEvent event) {
-		
-		operator = '-';
 
-		fuegeZahlOderOperandHinzu("-");
+		tauscheOperant('-');
+
+		operator = '-';
 	}
 
 	@FXML
 	void multiplikation(ActionEvent event) {
 
+		tauscheOperant('*');
+
 		operator = '*';
-		
-		fuegeZahlOderOperandHinzu("*");
 	}
 
 	@FXML
 	void division(ActionEvent event) {
 
+		tauscheOperant('/');
+
 		operator = '/';
-		
-		fuegeZahlOderOperandHinzu("/");
 
 	}
 
 	@FXML
 	void berechneErgebnis(ActionEvent event) {
-		
+
 		double ergebnis = 0;
-		
+
 		if (operator == '+') {
 			String[] teilen = eingabeTextField.getText().split("\\+");
 			double zahl1 = Double.parseDouble(teilen[0]);
 			double zahl2 = Double.parseDouble(teilen[1]);
 			ergebnis = zahl1 + zahl2;
- 		
-		} else if(operator == '-') {
- 			String[] teilen = eingabeTextField.getText().split("-");
- 			double zahl1 = Double.parseDouble(teilen[0]);
- 			double zahl2 = Double.parseDouble(teilen[1]);
+
+		} else if (operator == '-') {
+			String[] teilen = eingabeTextField.getText().split("-");
+			double zahl1 = Double.parseDouble(teilen[0]);
+			double zahl2 = Double.parseDouble(teilen[1]);
 			ergebnis = zahl1 - zahl2;
- 		
-		} else if(operator == '*') {
+
+		} else if (operator == '*') {
 			String[] teilen = eingabeTextField.getText().split("\\*");
 			double zahl1 = Double.parseDouble(teilen[0]);
- 			double zahl2 = Double.parseDouble(teilen[1]);
+			double zahl2 = Double.parseDouble(teilen[1]);
 			ergebnis = zahl1 * zahl2;
-		
-		} else if(operator == '/') {
+
+		} else if (operator == '/') {
 			String[] teilen = eingabeTextField.getText().split("/");
 			double zahl1 = Double.parseDouble(teilen[0]);
- 			double zahl2 = Double.parseDouble(teilen[1]);
- 			
- 			if (zahl2 != 0) {
- 				ergebnis = zahl1 / zahl2;
-				
+			double zahl2 = Double.parseDouble(teilen[1]);
+
+			if (zahl2 != 0) {
+				ergebnis = zahl1 / zahl2;
+
 			} else {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setContentText("Bitte geben Sie eine andere zweite Zahle als die 0 ein.");
@@ -148,70 +146,83 @@ public class Controller {
 	@FXML
 	void nullTextFieldHinzufuegen(ActionEvent event) {
 
-		fuegeZahlOderOperandHinzu("0");
+		fuegeZahlHinzu("0");
 
 	}
 
 	@FXML
 	void einsTextFieldHinzufuegen(ActionEvent event) {
 
-		fuegeZahlOderOperandHinzu("1");
+		fuegeZahlHinzu("1");
 	}
 
 	@FXML
 	void zweiTextFieldHinzufuegen(ActionEvent event) {
 
-		fuegeZahlOderOperandHinzu("2");
+		fuegeZahlHinzu("2");
 	}
 
 	@FXML
 	void dreiTextFieldHinzufuegen(ActionEvent event) {
 
-		fuegeZahlOderOperandHinzu("3");
+		fuegeZahlHinzu("3");
 	}
 
 	@FXML
 	void vierTextFieldHinzufuegen(ActionEvent event) {
 
-		fuegeZahlOderOperandHinzu("4");
+		fuegeZahlHinzu("4");
 	}
 
 	@FXML
 	void fuenfTextFieldHinzufuegen(ActionEvent event) {
 
-		fuegeZahlOderOperandHinzu("5");
+		fuegeZahlHinzu("5");
 	}
 
 	@FXML
 	void sechsTextFieldHinzufuegen(ActionEvent event) {
 
-		fuegeZahlOderOperandHinzu("6");
+		fuegeZahlHinzu("6");
 	}
 
 	@FXML
 	void siebenTextFieldHinzufuegen(ActionEvent event) {
 
-		fuegeZahlOderOperandHinzu("7");
+		fuegeZahlHinzu("7");
 	}
 
 	@FXML
 	void achtTextFieldHinzufuegen(ActionEvent event) {
 
-		fuegeZahlOderOperandHinzu("8");
+		fuegeZahlHinzu("8");
 	}
 
 	@FXML
 	void neunTextFieldHinzufuegen(ActionEvent event) {
 
-		fuegeZahlOderOperandHinzu("9");
+		fuegeZahlHinzu("9");
 	}
 
-	private void fuegeZahlOderOperandHinzu(final String neueZahl) {
+	private void fuegeZahlHinzu(final String neueZahl) {
 
 		String bisherigerText = eingabeTextField.getText();
 
 		eingabeTextField.setText(bisherigerText + neueZahl);
 
 	}
-	
+
+	private void tauscheOperant(char neuerOperator) {
+
+		String bisherigerText = eingabeTextField.getText();
+
+		if (bisherigerText.contains(Character.toString(operator))) {
+			eingabeTextField.setText(bisherigerText.replace(operator, neuerOperator));
+
+		} else {
+			eingabeTextField.setText(bisherigerText + neuerOperator);
+
+		}
+
+	}
 }
