@@ -1,13 +1,12 @@
-package einarmigenBanditen;
+package umrechner;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
 import javafx.stage.Stage;
 
-public class EinarmigenBanditenMain extends Application {
+public class UmrechnerMain extends Application {
 
 	@Override
 	public void start(Stage meineStage) {
@@ -18,13 +17,12 @@ public class EinarmigenBanditenMain extends Application {
 			Parent root = FXMLLoader.load(getClass().getResource("Controller.fxml"));
 
 			// die Szene erzeugen
-			// an den Konstruktor werden der oberste Knoten Groeße an
-			Scene meineScene = new Scene(root, 850, 850);
+			Scene meineScene = new Scene(root, 900, 750);
 
 			// den Titel über die Stage setzen
-			meineStage.setTitle("Einarmiger Bandit");
+			meineStage.setTitle("Umrechner");
 
-			// die Szene setzen
+			// die Szene hinzufügen
 			meineStage.setScene(meineScene);
 
 			// Größenänderung verhindern
@@ -42,4 +40,5 @@ public class EinarmigenBanditenMain extends Application {
 		launch(args);
 
 	}
+
 }

@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="745.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="einarmigenBanditen.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#wuerfelnUndAuswaerten" prefHeight="850.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="einarmigenBanditen.Controller">
    <children>
-      <Label alignment="CENTER" layoutX="77.0" layoutY="109.0" prefHeight="47.0" prefWidth="707.0" text="Willkommen beim Spiel Einarmiger Bandit">
+      <Label alignment="CENTER" layoutX="61.0" layoutY="102.0" prefHeight="47.0" prefWidth="707.0" text="Willkommen beim Spiel Einarmiger Bandit">
          <font>
             <Font name="System Bold Italic" size="32.0" />
          </font>
@@ -47,7 +47,7 @@
             </ImageView>
          </graphic>
       </Label>
-      <Button fx:id="losButton" layoutX="281.0" layoutY="521.0" mnemonicParsing="false" onAction="#wuerfelnUndAuswaerten" prefHeight="62.0" prefWidth="323.0" text="Los geht`s" textFill="#5412ed">
+      <Button fx:id="losButton" layoutX="264.0" layoutY="521.0" mnemonicParsing="false" onAction="#wuerfelnUndAuswaerten" prefHeight="62.0" prefWidth="323.0" text="Los geht`s" textFill="#5412ed">
          <font>
             <Font name="System Bold Italic" size="22.0" />
          </font></Button>
@@ -61,5 +61,10 @@
             <Font size="14.0" />
          </font>
       </TextField>
+      <Label fx:id="ausgabeLabel" alignment="CENTER" layoutX="174.0" layoutY="643.0" prefHeight="144.0" prefWidth="503.0" textAlignment="CENTER" textFill="#2e27ed" wrapText="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
