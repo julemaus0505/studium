@@ -62,6 +62,7 @@ public class Controller {
 
 	private char operator;
 
+	// wurde auf Button addition geklickt
 	@FXML
 	void addition(ActionEvent event) {
 
@@ -72,6 +73,7 @@ public class Controller {
 		additionButton.setDisable(true);
 	}
 
+	// wurde auf Button subtraktion geklickt
 	@FXML
 	void subtraktion(ActionEvent event) {
 
@@ -82,6 +84,7 @@ public class Controller {
 		subtraktionButton.setDisable(true);
 	}
 
+	// wurde auf Button multiplikation geklickt
 	@FXML
 	void multiplikation(ActionEvent event) {
 
@@ -92,6 +95,7 @@ public class Controller {
 		multiplikationButton.setDisable(true);
 	}
 
+	// wurde auf Button division geklickt
 	@FXML
 	void division(ActionEvent event) {
 
@@ -260,6 +264,7 @@ public class Controller {
 
 	}
 	
+	// die Button deaktivieren
 	private void berechnungsButtonAktivieren() {
 		additionButton.setDisable(false);
 		subtraktionButton.setDisable(false);

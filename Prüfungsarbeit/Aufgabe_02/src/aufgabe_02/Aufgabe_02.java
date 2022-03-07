@@ -11,7 +11,7 @@ public class Aufgabe_02 {
 		int zahl2;
 		int anzahlDruchlaeufe = 0;
 
-		// ein Objekt von Scanner erstellt
+		// ein Objekt von Scanner erstellt für die Eingabe in der Console
 		Scanner scanner = new Scanner(System.in);
 
 		do {
@@ -19,19 +19,19 @@ public class Aufgabe_02 {
 			// Bitte geben Sie Zahl1 ein
 			System.out.println("Bitte geben Sie die erste Zahl ein.");
 
-			// eingabe vom Anwender von Zahl1
+			// einlesen der Eingabe vom Anwender von Zahl1
 			zahl1 = (int) einlesenZahlen(scanner);
 
 			// Bitte geben Sie Zahl2 ein
 			System.out.println("Bitte geben Sie zweite Zahl ein.");
 
-			// Eingabe vom Anwender von Zahl2
+			// einlesen der Eingabe vom Anwender von Zahl2
 			zahl2 = (int) einlesenZahlen(scanner);
 
-			// Sind Zahl1 und Zahl2 gleich sind soll die Eingabe wiederholt werden
+			// Sind Zahl1 und Zahl2 gleich soll die Eingabe wiederholt werden
 		} while (zahl1 == zahl2);
 
-		// wenn Zahl1 kleiner als Zahl2 ist
+		// wenn Zahl1 kleiner als Zahl2 geht es in die for Schleife
 		if (zahl1 < zahl2) {
 
 			// ist die Zahl1 kleiner als Zahl2 dann zähle die Durchläufe
@@ -62,6 +62,7 @@ public class Aufgabe_02 {
 				String wert = scanner.nextLine();
 				zahl = Integer.parseInt(wert);
 
+				// NumberFormatException fängt den Fehler ab wenn keine Zahl eingeben wurde
 			} catch (NumberFormatException exception) {
 				System.out.println("Bitte geben Sie eine ganz Zahl ein.");
 			}

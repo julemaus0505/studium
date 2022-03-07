@@ -37,7 +37,6 @@ public class VokaleUndKonsonantenErmitteln {
 				++konsonanten;
 				break;
 			}
-
 		}
 
 		// Ausgabe auf der Console wieviel Vokale und wieviel Konsonanten

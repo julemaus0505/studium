@@ -40,6 +40,7 @@ public class GrundstuecksrechnerMain extends Application {
 
 	}
 
+	// die Main zum Starten für das Programm
 	public static void main(String[] args) {
 
 		launch(args);

@@ -12,9 +12,11 @@ import javafx.scene.image.ImageView;
 
 public class Controller {
 
+	// Array für die Würfel Bilder
 	private static final String[] BILDER_WUERFEL = { "eins.png", "zwei.png", "drei.png", "vier.png", "fuenf.png",
 			"sechs.png" };
 
+	// Konstanten
 	private static final int EINSATZ = 10;
 
 	private static final int GEWINN_2_GLEICHE = 20;
@@ -49,7 +51,6 @@ public class Controller {
 
 		// würfeln
 		Random zufall = new Random();
-
 		int wuerfel1 = zufall.nextInt(6) + 1;
 		int wuerfel2 = zufall.nextInt(6) + 1;
 		int wuerfel3 = zufall.nextInt(6) + 1;

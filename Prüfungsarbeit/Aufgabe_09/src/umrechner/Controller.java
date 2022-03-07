@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import umrechner.formatter.TextFormatterFactory;
 
 public class Controller implements Initializable {
@@ -32,6 +33,23 @@ public class Controller implements Initializable {
 
 	@FXML
 	private Button umrechenArabischeZahlenButton;
+
+	// zum leeren der Ausgabe Felder
+	@FXML
+	void leerenRoemischesAusgabeTextField(MouseEvent event) {
+
+		if (event.getSource() == roemischeAusgabeTextField) {
+			roemischeAusgabeTextField.setText("");
+		}
+	}
+
+	@FXML
+	void leerenArabischeAusgabeTextField(MouseEvent event) {
+
+		if (event.getSource() == arabischeAusgabeTextField) {
+			arabischeAusgabeTextField.setText("");
+		}
+	}
 
 	@FXML
 	void umrechenInRoemischeZahlen(ActionEvent event) {
@@ -215,11 +233,9 @@ public class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		umrechenRoemischeZahlButton.disableProperty().bind(arabischeEingabeTextField.textProperty().isEmpty());
 		umrechenArabischeZahlenButton.disableProperty().bind(roemischeEingabeTextField.textProperty().isEmpty());
-		
-	
 
 		arabischeEingabeTextField.setTextFormatter(TextFormatterFactory.createIntegerTextFormatter());
 		roemischeEingabeTextField.setTextFormatter(TextFormatterFactory.createRoemischeZahlenTextFormatter());

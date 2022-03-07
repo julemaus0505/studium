@@ -17,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 
 public class Controller implements Initializable {
 
+	// Konstanten
 	static final int MEHRWERTSTEUER = 19;
 	static final int PROVISION = 5;
 
@@ -66,9 +67,9 @@ public class Controller implements Initializable {
 
 		// Ausgabe der Daten in einer TextArea
 		ausgabeTextArea.setText(String.format("""
-				Das Grundstück kostet %d Euro.
-				Der Preis für das Grundstück mit Provision beträgt %d Euro.
-				Der Preis für das Grundstück mit Mehrwertsteuer und Provision beträgt %d Euro.
+				Das Grundstück kostet %.2f Euro.
+				Der Preis für das Grundstück mit Provision beträgt %.2f Euro.
+				Der Preis für das Grundstück mit Mehrwertsteuer und Provision beträgt %.2f Euro.
 				""", preisGrundstueck, preisGrundstueckProvision, preisGrundstueckMehrwertsteuer));
 	}
 

@@ -23,6 +23,7 @@ public class TextFormatterFactory {
 
 		Pattern validEditingState = Pattern.compile("-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?");
 
+		// Filter damit nur diese Zeichen und Zahlen eingegeben werden können
 		UnaryOperator<TextFormatter.Change> filter = c -> {
 			String text = c.getControlNewText();
 			if (validEditingState.matcher(text).matches()) {
@@ -32,6 +33,7 @@ public class TextFormatterFactory {
 			}
 		};
 
+		// Konvertierer um den eingegebenen Text in ein Integer umzuwandeln  
 		StringConverter<Double> converter = new StringConverter<Double>() {
 
 			@Override
