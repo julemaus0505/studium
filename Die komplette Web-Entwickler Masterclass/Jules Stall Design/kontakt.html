@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;1,100;1,300;1,900&family=Nunito+Sans:ital,wght@0,200;0,300;1,200;1,300;1,400;1,600&display=swap"
+        rel="stylesheet">
+
+    <title>Kontakt</title>
+</head>
+
+<body>
+    <img id="bildLogo" src="logos/Horses.gif" alt="Logo">
+    <header class="header-container">
+        <nav class="navOben">
+            <a href="startseite.html">Home</a>
+            <a href="pferdeSchilder.html">Pferd Schilder</a>
+            <a href="hundeSchilder.html">Hunde & Co</a>
+            <a href="geschenkGutscheine.html">Gutscheine</a>
+            <a href="kontakt.html">Kontakt</a>
+            <a href="warenkorb.html">Warenkorb</a>
+        </nav>
+    </header>
+    <!-- 
+        Kommentare:
+        Das wird mein Shop.
+    -->
+    <h1 class="überschrift"><i><b>Kontakt</b></i></h1>
+    <form class="kontakt">
+        <h4 class="überschriftKontaktFelder">Anrede</h4>
+        <br>
+        <select name="Anrede" id="anrede"><br>
+            <br>
+            <option value="Bitte wählen" checked>Bitte wählen</option>
+            <option value="Frau">Frau</option>
+            <option value="Herr">Herr</option>
+        </select>
+        <br>
+        <br>
+        <h4 class="überschriftKontaktFelder">Dein voller Name (Pflichtfeld)</h4>
+        <input class="kontaktText" type="text" name="vorname" size="85" placeholder="Vorname Nachname"> <br>
+        <h4 class="überschriftKontaktFelder">Deine E-Mail-Adresse (Pflichtfeld)</h4>
+        <input class="kontaktText" type="email" name="e-mail" minlength="8" maxlength="20" size="85" autocomplete="aus"
+            placeholder="Deine Emailadresse"> <br>
+        <h4 class="überschriftKontaktFelder">Betreff (Pflichtfeld)</h4>
+        <input class="kontaktText" type="text" name="betreff" size="85" placeholder="Betreff"> <br>
+        <h4 class="überschriftKontaktFelder">Bestellnummer (Pflichtfeld)</h4>
+        <input class="kontaktText" type="text" name="betreff" size="85" placeholder="Bestellnummer"> <br>
+        <br>
+        <h4 class="überschriftKontaktFelder">Deine Nachricht</h4>
+        <textarea class="kontaktText" name="Nachricht" id="nachricht" cols="80" rows="15"
+            placeholder="Deine Nachricht"></textarea>
+        <br>
+        <br>
+        <h3>Hier können sie eine Datei mit schicken:</h3>
+        <br>
+        <input type="file" name="meineDatei"> <br>
+        <br>
+        <input type="button" name="absenden" value="Absenden"> <br>
+    </form>
+    <footer>
+        <ul class="navigation">
+            <li><a href="allgemeine_Geschäftsbedingungen.html">Allgemeine Geschäftsbedingungen</a>
+            <li><a href="datenschutzerklärung.html">Datenschutzerklärung</a></li>
+            <li><a href="widerrufsrecht.html">Widerrufsrecht</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+        </ul>
+    </footer>
+</body>
+
+</html>

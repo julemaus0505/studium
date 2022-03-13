@@ -1,0 +1,52 @@
+<html lang="de-DE">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox - Ein einfaches Beispiel</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            flex-basis: 800px;
+            flex-grow: 0;
+            flex-shrink: 1;
+
+            display: flex;
+            /*
+            max-width: 800px;
+            margin: 0px auto;
+            */
+        }
+
+        .navigation {
+            flex-basis: 200px;
+            flex-grow: 0;
+            flex-shrink: 1;
+        }
+
+        .content {
+            flex-basis: 0px;
+            flex-grow: 1;
+            flex-shrink: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box navigation">
+            <h4>Navigation</h4>
+        </div>
+        <div class="box content">
+            <h4>Inhalsbereich!</h4>
+        </div>
+    </div>
+</body>
+
+</html>

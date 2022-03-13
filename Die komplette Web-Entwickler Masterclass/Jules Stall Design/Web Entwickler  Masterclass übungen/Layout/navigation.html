@@ -1,0 +1,37 @@
+<html lang="de-DE">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox - Ein einfaches Beispiel</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <style>
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+
+            border: 1px solid black;
+            background-color: chartreuse;
+            height: 40px;
+            padding: 0px;
+            color: black;
+        }
+
+        .navigation li {
+            list-style-type: none;
+            flex: 0 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="navigation">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Seite 1</a></li>
+        <li><a href="#">Seite 2</a></li>
+        <li><a href="#">Seite 3</a></li>
+    </ul>
+</body>
+
+</html>

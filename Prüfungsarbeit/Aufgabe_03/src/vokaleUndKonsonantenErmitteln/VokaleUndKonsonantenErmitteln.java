@@ -13,12 +13,14 @@ public class VokaleUndKonsonantenErmitteln {
 		// ein Objekt von Scanner erstellt
 		Scanner scanner = new Scanner(System.in);
 		
-		// Bitte geben Sie einen Text in der Console ein
 		System.out.println("Bitte geben sie einen Text ein.");
 
 		// Text wird vom Anwender in die Console eingegeben 
 		String text = scanner.nextLine();
 
+		//Den Scanner schlieﬂen
+		scanner.close();
+		
 		// der Text in Kleinbuchstaben umwandeln
 		text = text.toLowerCase();
 
@@ -39,8 +41,7 @@ public class VokaleUndKonsonantenErmitteln {
 			}
 		}
 
-		// Ausgabe auf der Console wieviel Vokale und wieviel Konsonanten
 		System.out.println("Anzahl der Vokale: " + vokale);
-		System.out.println("Anzahl der Konsonaten: " + konsonanten);
+		System.out.println("Anzahl der Konsonanten: " + konsonanten);
 	}
 }

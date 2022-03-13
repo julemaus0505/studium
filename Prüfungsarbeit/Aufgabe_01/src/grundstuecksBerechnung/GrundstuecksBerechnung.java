@@ -13,13 +13,13 @@ public class GrundstuecksBerechnung {
 		// ein Objekt von Scanner erstellt für die Eingabe in der Console
 		Scanner scanner = new Scanner(System.in);
 
-		// Ausgabe in der Console: Bitte geben Sie die Länge ein
+		
 		System.out.println("Bitte geben sie die Länge in Meter ein:");
 
 		// Eingabe der Länge in die Console
 		double laenge = einlesenZahlen(scanner);
 
-		// Ausgabe in der Console: Bitte geben sie die Breite ein
+		
 		System.out.println("Bitte geben Sie die Breite in Meter ein:");
 
 		// Eingabe der Breite in die Console
@@ -28,7 +28,7 @@ public class GrundstuecksBerechnung {
 		// Berechnung der Quadratmeter vom Grundstück
 		double quadratmeter = laenge * breite;
 
-		// Ausgabe in der Console: Bitte geben die den Preis
+		
 		System.out.println("Bitte geben Sie den Preis pro Quadratmeter ein:");
 
 		// Eingabe vom Preis Pro Quadratmeter
@@ -37,21 +37,21 @@ public class GrundstuecksBerechnung {
 		// Berechnung Grundstückspreis
 		double preisGrundstueck = quadratmeter * preisProQuadratmeter;
 
-		// Ausgabe in der Console: Was das Grundstück kostet
-		System.out.println("Das Grundstück kostet " + preisGrundstueck + " Euro.");
+		
+		System.out.println(String.format("Das Grundstück kostet %.2f Euro. ", preisGrundstueck));
 
 		// Berechnung Grundstückspreis plus 5% Provision
 		preisGrundstueck += preisGrundstueck / 100 * PROVISION;
 
-		// Ausgabe in der Console: Was das Grunstück mit 5% Provision kostet
-		System.out.println("Der Preis für das Grundstück mit Provision beträgt " + preisGrundstueck + " Euro.");
+		
+		System.out.println(String.format("Der Preis für das Grundstück mit Provision beträgt %.2f Euro. ", preisGrundstueck));
 
 		// Berechnung Grundstückspreis plus 19% Mehrwertsteuer
 		preisGrundstueck += preisGrundstueck / 100 * MEHRWERTSTEUER;
 
-		// Ausgabe in der Console: Was das Grunstück mit 19% Mehrwertsteuer kostet
-		System.out.println(
-				"Der Preis für das Grundstück mit Mehrwertsteuer und Provision beträgt " + preisGrundstueck + " Euro.");
+		
+		System.out.println(String.format(
+				"Der Preis für das Grundstück mit Mehrwertsteuer und Provision beträgt %.2f Euro. ", preisGrundstueck));
 	}
 
 	private static double einlesenZahlen(Scanner scanner) {
@@ -69,7 +69,7 @@ public class GrundstuecksBerechnung {
 				System.out.println("Bitte eine Zahl eingeben.");
 			}
 
-			// die schleife soll weiter laufen wenn zahl == null ist
+			// die Schleife soll weiter laufen wenn zahl == null ist
 		} while (zahl == null);
 
 		// Rückgabewert: zahl

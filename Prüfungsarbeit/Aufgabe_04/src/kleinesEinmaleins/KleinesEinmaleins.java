@@ -1,6 +1,6 @@
-package kleineEinmaleins;
+package kleinesEinmaleins;
 
-public class KleineEinmaleins {
+public class KleinesEinmaleins {
 
 	public static void main(String[] args) {
 
@@ -23,11 +23,9 @@ public class KleineEinmaleins {
 			// laufe einmal über die ganze Spalten
 			for (int j = 0; j < array[i].length; j++) {
 
-				// 1*1 Ausgabe in der Console
 				System.out.print(array[i][j] + "\t");
 
 			}
-			// für den Zeilenumbuch eine leere Zeile
 			System.out.println();
 		}
 	}

@@ -16,13 +16,11 @@ public class Aufgabe_02 {
 
 		do {
 
-			// Bitte geben Sie Zahl1 ein
 			System.out.println("Bitte geben Sie die erste Zahl ein.");
 
 			// einlesen der Eingabe vom Anwender von Zahl1
 			zahl1 = (int) einlesenZahlen(scanner);
 
-			// Bitte geben Sie Zahl2 ein
 			System.out.println("Bitte geben Sie zweite Zahl ein.");
 
 			// einlesen der Eingabe vom Anwender von Zahl2
@@ -39,8 +37,8 @@ public class Aufgabe_02 {
 				anzahlDruchlaeufe++;
 
 			}
-			// Ausgabe wieviele Durchläufe gebaucht worden sind von Zahl1 bis Zahl2
-			System.out.println("Anzahl der Durchläufe der ermittelt wurde " + anzahlDruchlaeufe);
+	
+			System.out.println("Anzahl der Durchläufe der ermittelt wurden: " + anzahlDruchlaeufe);
 
 		} else {
 			// ist die Zahl1 kleiner als Zahl2 dann zähle die Durchläufe
@@ -48,8 +46,8 @@ public class Aufgabe_02 {
 				anzahlDruchlaeufe++;
 
 			}
-			// Ausgabe wieviele Durchläufe gebaucht worden sind von Zahl2 bis Zahl1
-			System.out.println("Anzahl der Durchläufe der ermittelt wurde " + anzahlDruchlaeufe);
+	
+			System.out.println("Anzahl der Durchläufe der ermittelt wurden: " + anzahlDruchlaeufe);
 		}
 	}
 

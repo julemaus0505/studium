@@ -3,7 +3,6 @@ package umrechner;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,73 +49,85 @@ public class Controller implements Initializable {
 			arabischeAusgabeTextField.setText("");
 		}
 	}
+	
+	
 
 	@FXML
 	void umrechenInRoemischeZahlen(ActionEvent event) {
 
 		int arabischeZahl = Integer.parseInt(arabischeEingabeTextField.getText());
-
-		StringBuilder stringBuilder = new StringBuilder();
-
-		while (arabischeZahl > 0) {
-
-			if (arabischeZahl >= 1000) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 1000, "M");
-
-			} else if (arabischeZahl >= 900) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 900, "CM");
-
-			} else if (arabischeZahl >= 500) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 500, "D");
-
-			} else if (arabischeZahl >= 400) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 400, "CD");
-
-			} else if (arabischeZahl >= 100) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 100, "C");
-
-			} else if (arabischeZahl >= 90) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 90, "XC");
-
-			} else if (arabischeZahl >= 50) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 50, "L");
-
-			} else if (arabischeZahl >= 40) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 40, "XL");
-
-			} else if (arabischeZahl >= 10) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 10, "X");
-
-			} else if (arabischeZahl >= 9) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 9, "IX");
-
-			} else if (arabischeZahl >= 8) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 8, "VIII");
-
-			} else if (arabischeZahl >= 7) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 7, "VII");
-
-			} else if (arabischeZahl >= 6) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 6, "VI");
-
-			} else if (arabischeZahl >= 5) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 5, "V");
-
-			} else if (arabischeZahl >= 4) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 4, "IV");
-
-			} else if (arabischeZahl >= 3) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 3, "III");
-
-			} else if (arabischeZahl >= 2) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 2, "II");
-
-			} else if (arabischeZahl >= 1) {
-				arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 1, "I");
+		
+		if (arabischeZahl <= 3999) {
+			
+			StringBuilder stringBuilder = new StringBuilder();
+			
+			while (arabischeZahl > 0) {
+				
+				if (arabischeZahl >= 1000) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 1000, "M");
+					
+				} else if (arabischeZahl >= 900) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 900, "CM");
+					
+				} else if (arabischeZahl >= 500) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 500, "D");
+					
+				} else if (arabischeZahl >= 400) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 400, "CD");
+					
+				} else if (arabischeZahl >= 100) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 100, "C");
+					
+				} else if (arabischeZahl >= 90) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 90, "XC");
+					
+				} else if (arabischeZahl >= 50) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 50, "L");
+					
+				} else if (arabischeZahl >= 40) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 40, "XL");
+					
+				} else if (arabischeZahl >= 10) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 10, "X");
+					
+				} else if (arabischeZahl >= 9) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 9, "IX");
+					
+				} else if (arabischeZahl >= 8) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 8, "VIII");
+					
+				} else if (arabischeZahl >= 7) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 7, "VII");
+					
+				} else if (arabischeZahl >= 6) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 6, "VI");
+					
+				} else if (arabischeZahl >= 5) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 5, "V");
+					
+				} else if (arabischeZahl >= 4) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 4, "IV");
+					
+				} else if (arabischeZahl >= 3) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 3, "III");
+					
+				} else if (arabischeZahl >= 2) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 2, "II");
+					
+				} else if (arabischeZahl >= 1) {
+					arabischeZahl = rechneInRoemischeZahlUm(arabischeZahl, stringBuilder, 1, "I");
+				}
 			}
+			
+			roemischeAusgabeTextField.setText(stringBuilder.toString());
+		
+		} else {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Es ist ein Fehler aufgetreten!");
+			alert.setContentText("Bitte nur Zahlen bis 3999 eingeben.");
+			alert.showAndWait();
 		}
 
-		roemischeAusgabeTextField.setText(stringBuilder.toString());
 
 	}
 
@@ -124,9 +135,9 @@ public class Controller implements Initializable {
 	void umrechenInArabischeZahlen(ActionEvent event) {
 
 		String roemischeZahl = roemischeEingabeTextField.getText();
-
+		
 		int arabischeZahl = 0;
-
+	
 		String umzuwandelndeBuchstaben = "";
 
 		int index = roemischeZahl.length() - 1;

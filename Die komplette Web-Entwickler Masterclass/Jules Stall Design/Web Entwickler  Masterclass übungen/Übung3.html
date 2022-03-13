@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de-de" >
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+        <title>Übung 3</title>
+    </head>
+    <body>
+      <h1>Formular</h1>
+        <form action="anmelden.php">
+            Namen: <br>
+            <input type="text" name="namen" placeholder="Bitte namen eingeben...." maxlength="15"> <br>
+            <br>
+            Wie ist dein Alter?<br>
+            <input type="number" name="alter" placeholder="Bitte das Alter eingeben..." minlength="12" maxlength="120"> <br>
+            <br>
+            E-Mail Adresse eingeben: <br>
+            <input type="email" name="e-mail" placeholder="E-Mail Adresse" autocomplete="aus" minlength="8"> <br>
+            <br>
+            <input type="submit" name="anmelden">
+            <br>
+        </form>
+        <form>
+            <br>
+            <h2>Wie reisen Sie am liebsten? </h2> <br>
+            <input type="radio" name="reisen" value="auto"> Mit dem Auto <br>
+            <input type="radio" name="reisen" value="flug"> Mit dem Flugzeug <br>
+            <input type="radio" name="reisen" value="zug"> Mit dem Zug <br>
+            <input type="radio" name="reisen" value="schiff"> Mit dem Schiff <br>
+            <br>
+            <h2>Was isst du am liebesten?</h2> <br>
+            <input type="checkbox" name="essen" value="döner"> Döner <br>
+            <input type="checkbox" name="essen" value="nudeln"> Gebratende Nudeln <br>
+            <input type="checkbox" name="essen" value="windbeutel"> Windbeutel <br>
+            <br>
+            <input type="color" name="farben"> <br>
+            <br>
+            <input type="date" name="datum"> <br>
+            <br>
+            Password eingeben: <br>
+            <input type="password" name="password" value="password" placeholder="Bitte Password eingeben..." size="20" minlength="8" maxlength="20">
+            <br>
+        </form>
+
+    </body>
+
+</html>

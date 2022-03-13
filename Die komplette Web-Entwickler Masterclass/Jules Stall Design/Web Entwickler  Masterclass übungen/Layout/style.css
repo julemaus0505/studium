@@ -1,0 +1,17 @@
+
+body {
+    background-color: rgb(190, 192, 187);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.box  {
+    background-color: white;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.box-first  {
+    background-color: white;
+    padding: 5px;
+    border: 1px solid black;
+}

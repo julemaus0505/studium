@@ -1,0 +1,210 @@
+/* Css style für index Baustellen Seite */
+body {
+    background-color:#e2e4f3;
+    font-family: 'Lato', serifenlos;
+    text-align: center;
+    font-size: 16px;
+}
+
+.container {
+    background-color: #e2e4f3;
+    border: 1px solid rgb(100, 100, 100);
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 30px rgb(10, 10, 10);
+    text-align-last: center;
+    
+
+    /*
+    margin-top: 20px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+
+    margin: 25px auto 25px auto;
+    */
+    margin: 25px auto;
+}
+
+.container img {
+    width: 600px;
+    margin: 0px auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px rgb(134, 134, 134);
+    padding-top: 10px;
+}
+
+.container h1 {
+    text-shadow: 0px 0px 10px #a59fa4;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-weight: lighter;
+    text-align-last: center;
+    font-size: 2.5em;
+}
+
+.container p {
+    padding-top: 50px;
+    font-size: 2.5em;
+}
+
+/* Css style für Startseite */
+
+#bildLogo {
+    width: 400px;
+    height: 400px;
+    
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    height: 40px;
+    padding: 0;
+    font-size: 1.5em;
+    text-shadow: 0px 0px 100px white;
+
+}
+
+.navigation li {
+    list-style-type: none;
+    flex: 0 0 auto;
+}
+
+.überschrift {
+    text-align: center;
+    font-size: 3em;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    color: #9397c0;
+    text-shadow: 0px 0px 5px white;
+}
+
+#startbild {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.flex-container  {
+  display: flex;
+  justify-content: space-evenly;
+ 
+}
+
+.flex-container > div {
+    background-color: #bdbdfc;
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+    width: 300px;
+    height: 300px;
+}
+
+
+
+.navUnten {
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.footer-container {
+    width: 1200px;
+    margin: 0px auto;
+}
+
+.footer-container a {
+    color: rgb(50, 50, 50);
+    text-shadow: 0px 0px 5px white;
+    margin-left: 35px;
+    margin-right: 35px;
+    
+}
+
+/*
+.header-container a {
+    color: rgb(50, 50, 50);
+    text-shadow: 0px 0px 5px white;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+*/
+
+
+/* Css style für Pferde Schilder Seite */
+
+.pferdeBilder {
+    margin-top: 100px;
+    width: 600px;
+    height: auto;
+}
+
+
+
+
+/* Css style für Hunde Schilder Seite */
+
+.hundeBilder {
+    margin-top: 2px;
+    width: 600px;
+    height: auto;
+}
+
+
+
+
+/* Css style für Geschenkgutscheine Seite */
+
+
+
+
+
+/* Css style für Kundenbewertung Seite */
+
+
+
+
+
+/* Css style für Kontakt Seite */
+
+.kontaktInput {
+    text-align: center;
+}
+
+.kontakt {
+    font-size: 1.2em;
+    
+}
+
+#anrede  {
+    font-size: 0.8em;
+    line-height: 100px;
+}
+
+.kontaktText {
+    font-size: 0.8em;
+   
+}
+
+.überschriftKontaktFelder {
+    font-weight: lighter;
+    text-align: left;
+    margin-left: 900px;
+}
+
+input {
+    line-height: 45px;
+}
+
+
+
+/* Css style für Warenkorb Seite */
+
+
+
+
+
+/* Css style für Impressum Seite */
